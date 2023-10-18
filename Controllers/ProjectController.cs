@@ -29,6 +29,26 @@ public class ProjectController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{id}")]
+    // [Authorize]
+    public IActionResult GetById(int id)
+    {
+        Project project = _dbContext
+            .Projects
+            .Include(p => p.Category)
+            .Include(p => p.ProjectNotes)
+            .Include(p => p.ProjectTasks)
+            .Include(p => p.UserProjects)
+            .SingleOrDefault(p => p.Id == id);
+
+        if (project == null)
+        {
+            return NotFound();
+        }
+
+            return Ok(project);
+    }
+
     // [HttpPost]
     // [Authorize]
     // public IActionResult CreateWorkOrder(WorkOrder workOrder)
