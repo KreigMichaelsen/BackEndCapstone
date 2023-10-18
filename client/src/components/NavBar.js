@@ -21,13 +21,31 @@ return (
     <div>
     <Navbar color="light" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-        🧹🧼House Rules
+        Back End Capstone
         </NavbarBrand>
         {loggedInUser ? (
         <>
             <NavbarToggler onClick={toggleNavbar} />
             <Collapse isOpen={open} navbar>
-            <Nav navbar></Nav>
+            <Nav navbar>
+                <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/projects">
+                    Projects
+                  </NavLink>
+                </NavItem>
+                {/* <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/workorders">
+                    Work Orders
+                  </NavLink>
+                </NavItem>
+                {loggedInUser.roles.includes("Admin") && (
+                  <NavItem onClick={() => setOpen(false)}>
+                    <NavLink tag={RRNavLink} to="/employees">
+                      Employees
+                    </NavLink>
+                  </NavItem>
+                )} */}
+              </Nav>
             </Collapse>
             <Button
             color="primary"
