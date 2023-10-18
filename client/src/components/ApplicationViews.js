@@ -3,6 +3,7 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Projects from "./projects/Projects";
+import ProjectDetails from "./projects/ProjectDetails";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -16,14 +17,32 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+        <Route path="projects">
         <Route
-          path="projects"
+        index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <Projects />
             </AuthorizedRoute>
           }
         />
+        <Route
+          path=":id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ProjectDetails />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+            path="create"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                Test
+              </AuthorizedRoute>
+            }
+            />
+        </Route>
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}
