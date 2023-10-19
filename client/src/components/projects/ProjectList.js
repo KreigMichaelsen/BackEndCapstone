@@ -5,6 +5,7 @@ import ProjectCard from "./ProjectCard";
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);
 
+
   const getAllProjects = () => {
     getProjects().then(setProjects);
   };
@@ -15,12 +16,14 @@ export default function ProjectList() {
 
   return (
     <>
-      <h2>Projects</h2>
+      
       {projects.map((project) => (
         <ProjectCard
           project={project}
           key={`project-${project.id}`}
-        ></ProjectCard>
+          getAllProjects={getAllProjects}
+        >
+        </ProjectCard>
       ))}
     </>
   );

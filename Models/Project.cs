@@ -7,7 +7,7 @@ public class Project
 {
     public int Id { get; set; }
     public string Title { get; set; }
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
     public Category Category { get; set; }
     public DateTime DueDate { get; set; }
     public bool IsCompleted { get; set; }
@@ -15,6 +15,7 @@ public class Project
     public List<ProjectNote> ProjectNotes { get; set; }
     public List<ProjectTask> ProjectTasks { get; set; }
     public List<UserProject> UserProjects { get; set; }
+   
     
 
     

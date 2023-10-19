@@ -1,28 +1,26 @@
 import { useState } from "react";
-import ProjectList from "./ProjectList";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import TaskList from "./TaskList.js";
 
-export default function Projects() {
+export default function Tasks() {
 
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      <div className="row">
-      <h2>Projects</h2>
-      <div className="col-sm-8">
-      <Button
+      <h2>Tasks</h2>
+       <Button
           color="dark"
           onClick={() => {
-            navigate(`/projects/create`)
+            navigate(`/tasks/create`)
           }}
         >
-          Create Project
+          Create Task
         </Button>
-        </div>
+      <div className="row">
         <div className="col-sm-8">
-          <ProjectList />
+          <TaskList />
         </div>
       </div>
     </div>
