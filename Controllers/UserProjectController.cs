@@ -7,11 +7,11 @@ namespace BackEndCapstone.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectController : ControllerBase
+public class UserProjectController : ControllerBase
 {
     private BackEndCapstoneDbContext _dbContext;
 
-    public ProjectController(BackEndCapstoneDbContext context)
+    public UserProjectController(BackEndCapstoneDbContext context)
     {
         _dbContext = context;
     }
@@ -20,42 +20,40 @@ public class ProjectController : ControllerBase
     // [Authorize]
     public IActionResult GetProjects()
     {
-        return Ok(_dbContext.Projects
-        .Include(p => p.Category)
+        return Ok(_dbContext.UserProjects
         .ToList());
     }
 
-    [HttpGet("{id}")]
-    // [Authorize]
-    public IActionResult GetById(int id)
-    {
-        Project project = _dbContext
-            .Projects
-            .Include(p => p.Category)
-            .Include(p => p.ProjectNotes)
-            .Include(p => p.ProjectTasks)
-            .Include(p => p.UserProjects)
-            .ThenInclude(up => up.UserProfile)
-            .SingleOrDefault(p => p.Id == id);
+    // [HttpGet("{id}")]
+    // // [Authorize]
+    // public IActionResult GetById(int id)
+    // {
+    //     Project project = _dbContext
+    //         .Projects
+    //         .Include(p => p.Category)
+    //         .Include(p => p.ProjectNotes)
+    //         .Include(p => p.ProjectTasks)
+    //         .Include(p => p.UserProjects)
+    //         .ThenInclude(up => up.UserProfile)
+    //         .SingleOrDefault(p => p.Id == id);
 
-        if (project == null)
-        {
-            return NotFound();
-        }
+    //     if (project == null)
+    //     {
+    //         return NotFound();
+    //     }
 
-            return Ok(project);
-    }
+    //         return Ok(project);
+    // }
 
-    [HttpPost]
-    // [Authorize]
-    public IActionResult CreateProject(Project project)
-    {
-        int newId = _dbContext.Projects.Count() > 0 ? _dbContext.Projects.Max(p => p.Id) + 1 : 1;
-        project.Id = newId;
-        _dbContext.Projects.Add(project);
-        _dbContext.SaveChanges();
-        return Created($"/api/project/{project.Id}", project);
-    }
+    // [HttpPost]
+    // // [Authorize]
+    // public IActionResult CreateProject(Project project)
+    // {
+        
+    //     _dbContext.Projects.Add(project);
+    //     _dbContext.SaveChanges();
+    //     return Created($"/api/project/{project.Id}", project);
+    // }
 
     // [HttpPut("{id}")]
     // [Authorize]
@@ -103,18 +101,14 @@ public class ProjectController : ControllerBase
     // [Authorize]
     public IActionResult DeleteProject(int id)
     {
-        Project projectToDelete = _dbContext.Projects
-        .Include(p => p.UserProjects)
-        .Include(p => p.ProjectTasks)
-        .SingleOrDefault(p => p.Id == id);
-        if (projectToDelete == null)
+        UserProject userProjectToDelete = _dbContext.UserProjects.SingleOrDefault(p => p.Id == id);
+        if (userProjectToDelete == null)
         {
             return NotFound();
         }
 
-        _dbContext.UserProjects.RemoveRange(projectToDelete.UserProjects);
-        _dbContext.ProjectTasks.RemoveRange(projectToDelete.ProjectTasks);
-        _dbContext.Projects.Remove(projectToDelete);
+    
+        _dbContext.UserProjects.Remove(userProjectToDelete);
         _dbContext.SaveChanges();
 
         return NoContent();

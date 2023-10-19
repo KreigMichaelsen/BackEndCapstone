@@ -33,12 +33,12 @@ return (
                     Projects
                   </NavLink>
                 </NavItem>
-                {/* <NavItem onClick={() => setOpen(false)}>
-                  <NavLink tag={RRNavLink} to="/workorders">
-                    Work Orders
+                <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/tasks">
+                    Tasks
                   </NavLink>
                 </NavItem>
-                {loggedInUser.roles.includes("Admin") && (
+                {/* {loggedInUser.roles.includes("Admin") && (
                   <NavItem onClick={() => setOpen(false)}>
                     <NavLink tag={RRNavLink} to="/employees">
                       Employees

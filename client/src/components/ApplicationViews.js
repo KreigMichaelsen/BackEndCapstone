@@ -4,6 +4,10 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Projects from "./projects/Projects";
 import ProjectDetails from "./projects/ProjectDetails";
+import { ProjectCreationForm } from "./projects/ProjectCreationForm";
+import { TaskCreationForm } from "./tasks/TaskCreationForm";
+import TaskDetails from "./tasks/TaskDetails";
+import Tasks from "./tasks/Tasks";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -38,7 +42,33 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             path="create"
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
-                Test
+                <ProjectCreationForm/>
+              </AuthorizedRoute>
+            }
+            />
+        </Route>
+        <Route path="tasks">
+        <Route
+        index
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <Tasks />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <TaskDetails />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+            path="create"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <TaskCreationForm/>
               </AuthorizedRoute>
             }
             />
