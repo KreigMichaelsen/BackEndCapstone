@@ -57,29 +57,29 @@ public class ProjectController : ControllerBase
         return Created($"/api/project/{project.Id}", project);
     }
 
-    // [HttpPut("{id}")]
+    [HttpPut("{id}")]
     // [Authorize]
-    // public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
-    // {
-    //     WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToUpdate == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     else if (id != workOrder.Id)
-    //     {
-    //         return BadRequest();
-    //     }
+    public IActionResult UpdateProject(Project project, int id)
+    {
+        Project projectToUpdate = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+        if (projectToUpdate  == null)
+        {
+            return NotFound();
+        }
+        else if (id != project.Id)
+        {
+            return BadRequest();
+        }
 
-    //     //These are the only properties that we want to make editable
-    //     workOrderToUpdate.Description = workOrder.Description;
-    //     workOrderToUpdate.UserProfileId = workOrder.UserProfileId;
-    //     workOrderToUpdate.BikeId = workOrder.BikeId;
+        //These are the only properties that we want to make editable
+        projectToUpdate.Title = project.Title;
+        projectToUpdate.CategoryId = project.CategoryId;
+        projectToUpdate.UserProjects = project.UserProjects;
 
-    //     _dbContext.SaveChanges();
+        _dbContext.SaveChanges();
 
-    //     return NoContent();
-    // }
+        return NoContent();
+    }
     // [HttpPut("{id}/complete")]
     // [Authorize]
     // public IActionResult CompleteWorkOrder(int id)

@@ -24,26 +24,25 @@ public class UserProfileController : ControllerBase
         .ToList());
     }
 
-    // [HttpGet("{id}")]
-    // // [Authorize]
-    // public IActionResult GetById(int id)
-    // {
-    //     Project project = _dbContext
-    //         .Projects
-    //         .Include(p => p.Category)
-    //         .Include(p => p.ProjectNotes)
-    //         .Include(p => p.ProjectTasks)
-    //         .Include(p => p.UserProjects)
-    //         .ThenInclude(up => up.UserProfile)
-    //         .SingleOrDefault(p => p.Id == id);
+    [HttpGet("{id}")]
+    // [Authorize]
+    public IActionResult GetById(int id)
+    {
+        UserProfile userProfile = _dbContext
+            .UserProfiles
+            .Include(p => p.IdentityUser)
+            .SingleOrDefault(p => p.Id == id);
 
-    //     if (project == null)
-    //     {
-    //         return NotFound();
-    //     }
+        if (userProfile == null)
+        {
+            return NotFound();
+        }
 
-    //         return Ok(project);
-    // }
+
+
+
+            return Ok(userProfile);
+    }
 
     // [HttpPost]
     // // [Authorize]

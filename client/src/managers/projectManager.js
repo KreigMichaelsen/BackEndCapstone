@@ -9,6 +9,16 @@ export const getProjectById = (id) => {
   
 };
 
+export const editProject = (project) => {
+  return fetch(`${apiUrl}/${project.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(project),
+  });
+};
+
 export const createProject = (project) => {
   return fetch(apiUrl, {
     method: "POST",
