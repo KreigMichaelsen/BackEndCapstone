@@ -63,70 +63,6 @@ namespace BackEndCapstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectNotes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    UserProfileId = table.Column<int>(type: "integer", nullable: false),
-                    ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    Body = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectNotes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProjectTasks",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    UserProfileId = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectTasks", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserProjects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserProfileId = table.Column<int>(type: "integer", nullable: false),
-                    ProjectId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProjects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -233,6 +169,49 @@ namespace BackEndCapstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    CategoryId = table.Column<int>(type: "integer", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectNotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    UserProfileId = table.Column<int>(type: "integer", nullable: false),
+                    ProjectId = table.Column<int>(type: "integer", nullable: false),
+                    Body = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectNotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectNotes_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfiles",
                 columns: table => new
                 {
@@ -240,7 +219,8 @@ namespace BackEndCapstone.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
-                    IdentityUserId = table.Column<string>(type: "text", nullable: true)
+                    IdentityUserId = table.Column<string>(type: "text", nullable: true),
+                    ProjectId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -250,6 +230,68 @@ namespace BackEndCapstone.Migrations
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserProfiles_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectTasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    ProjectId = table.Column<int>(type: "integer", nullable: true),
+                    UserProfileId = table.Column<int>(type: "integer", nullable: true),
+                    CategoryId = table.Column<int>(type: "integer", nullable: true),
+                    DueDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectTasks_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProjectTasks_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProjectTasks_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserProjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserProfileId = table.Column<int>(type: "integer", nullable: true),
+                    ProjectId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProjects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserProjects_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserProjects_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -257,8 +299,8 @@ namespace BackEndCapstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "e37dbb43-5aef-4e77-8146-fd3f5398f30d", "User", "user" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "498796be-d904-44c4-b1c1-bdbee0590883", "Admin", "admin" }
+                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "89e51e6d-09f8-4793-a47f-867790eba18d", "User", "user" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "9c6c245d-4e64-434f-92d2-e79e30fcb468", "Admin", "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -266,8 +308,8 @@ namespace BackEndCapstone.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "b756857a-13c6-434e-a3ca-dc65ad4315a0", 0, "423d9299-209c-45ce-8942-56ba865573f7", "kreig@michaelsen.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJgc0Rh/vooF1vxNSgfK27I38+6GfgutQqRmDOJTqIO2MLT3NIFImpXQ8cEmTWxo+g==", null, false, "a5abe609-5277-4633-befb-5d538f4966ee", false, "KreigMichaelsen" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "b21c838c-3506-41a3-bd01-f5f1037d29f4", "kreig@michaelsen.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEF8SO5XopvCbO1CbhJhQi/EWTn1SqilCKRsBPrZZ6Jip7kFpRSk/Gs8V0aAScu87jQ==", null, false, "e4228796-6f70-4ba3-b574-20302f170e62", false, "KreigMichaelsen" }
+                    { "b756857a-13c6-434e-a3ca-dc65ad4315a0", 0, "4c2ef1aa-09a5-46ea-869b-acb890c8400a", "normal@user.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEGXaVQn3eAkuTsIv57tf6exBAYhdc6RXvyyv46BGAuNFIZLTXcZtEULfAGbSeT90wA==", null, false, "9ffcbf2d-6649-4311-a336-f4b62d83090f", false, "NormalUser" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "436224b3-892a-4714-a7f0-d30d4ebd0d1c", "kreig@michaelsen.com", false, false, null, null, null, "AQAAAAEAACcQAAAAENQUIFNdEfZz1aaqY+FpPgBV7aIy5l4XjLxGcq9D1cPoXvH0OyjfS0d0+7Ls18/2hA==", null, false, "c5ca1cb0-95ce-4b20-a2ae-34d05e238a4e", false, "KreigMichaelsen" }
                 });
 
             migrationBuilder.InsertData(
@@ -279,6 +321,35 @@ namespace BackEndCapstone.Migrations
                     { 2, "Work" },
                     { 3, "Finance" },
                     { 4, "Health and Wellness" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "b756857a-13c6-434e-a3ca-dc65ad4315a0" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Projects",
+                columns: new[] { "Id", "CategoryId", "DueDate", "IsCompleted", "Title" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #1" },
+                    { 2, 2, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #2" },
+                    { 3, 3, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #3" },
+                    { 4, 4, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #4" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserProfiles",
+                columns: new[] { "Id", "FirstName", "IdentityUserId", "LastName", "ProjectId" },
+                values: new object[,]
+                {
+                    { 1, "Kreig", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Michaelsen", null },
+                    { 2, "Normal", "b756857a-13c6-434e-a3ca-dc65ad4315a0", "User", null }
                 });
 
             migrationBuilder.InsertData(
@@ -304,18 +375,6 @@ namespace BackEndCapstone.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Projects",
-                columns: new[] { "Id", "CategoryId", "DueDate", "IsCompleted", "Title" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #1" },
-                    { 2, 2, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #2" },
-                    { 3, 3, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #3" },
-                    { 4, 4, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #4" },
-                    { 5, 5, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Project #5" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "UserProjects",
                 columns: new[] { "Id", "ProjectId", "UserProfileId" },
                 values: new object[,]
@@ -324,24 +383,6 @@ namespace BackEndCapstone.Migrations
                     { 2, 1, 2 },
                     { 3, 2, 1 },
                     { 4, 3, 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[,]
-                {
-                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "b756857a-13c6-434e-a3ca-dc65ad4315a0" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserProfiles",
-                columns: new[] { "Id", "FirstName", "IdentityUserId", "LastName" },
-                values: new object[,]
-                {
-                    { 1, "Kreig", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Michaelsen" },
-                    { 2, "Normal", "b756857a-13c6-434e-a3ca-dc65ad4315a0", "User" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -382,9 +423,49 @@ namespace BackEndCapstone.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProjectNotes_ProjectId",
+                table: "ProjectNotes",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_CategoryId",
+                table: "Projects",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTasks_CategoryId",
+                table: "ProjectTasks",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTasks_ProjectId",
+                table: "ProjectTasks",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTasks_UserProfileId",
+                table: "ProjectTasks",
+                column: "UserProfileId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_IdentityUserId",
                 table: "UserProfiles",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProfiles_ProjectId",
+                table: "UserProfiles",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProjects_ProjectId",
+                table: "UserProjects",
+                column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProjects_UserProfileId",
+                table: "UserProjects",
+                column: "UserProfileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -405,19 +486,10 @@ namespace BackEndCapstone.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "ProjectNotes");
 
             migrationBuilder.DropTable(
-                name: "Projects");
-
-            migrationBuilder.DropTable(
                 name: "ProjectTasks");
-
-            migrationBuilder.DropTable(
-                name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "UserProjects");
@@ -426,7 +498,16 @@ namespace BackEndCapstone.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "UserProfiles");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

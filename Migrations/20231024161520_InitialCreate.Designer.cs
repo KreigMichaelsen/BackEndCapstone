@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEndCapstone.Migrations
 {
     [DbContext(typeof(BackEndCapstoneDbContext))]
-    [Migration("20231017192914_InitialCreate")]
+    [Migration("20231024161520_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace BackEndCapstone.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("DueDate")
@@ -83,6 +83,8 @@ namespace BackEndCapstone.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Projects");
 
@@ -118,14 +120,6 @@ namespace BackEndCapstone.Migrations
                             DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             Title = "Project #4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 5,
-                            DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsCompleted = false,
-                            Title = "Project #5"
                         });
                 });
 
@@ -150,6 +144,8 @@ namespace BackEndCapstone.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectNotes");
 
@@ -196,7 +192,7 @@ namespace BackEndCapstone.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("DueDate")
@@ -205,16 +201,22 @@ namespace BackEndCapstone.Migrations
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserProfileId")
+                    b.Property<int?>("UserProfileId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("ProjectTasks");
 
@@ -278,9 +280,14 @@ namespace BackEndCapstone.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("UserProfiles");
 
@@ -309,13 +316,17 @@ namespace BackEndCapstone.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserProfileId")
+                    b.Property<int?>("UserProfileId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("UserProjects");
 
@@ -375,14 +386,14 @@ namespace BackEndCapstone.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "498796be-d904-44c4-b1c1-bdbee0590883",
+                            ConcurrencyStamp = "9c6c245d-4e64-434f-92d2-e79e30fcb468",
                             Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "50a26418-8379-41c5-9cb4-937ee3be79f3",
-                            ConcurrencyStamp = "e37dbb43-5aef-4e77-8146-fd3f5398f30d",
+                            ConcurrencyStamp = "89e51e6d-09f8-4793-a47f-867790eba18d",
                             Name = "User",
                             NormalizedName = "user"
                         });
@@ -481,13 +492,13 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b21c838c-3506-41a3-bd01-f5f1037d29f4",
+                            ConcurrencyStamp = "436224b3-892a-4714-a7f0-d30d4ebd0d1c",
                             Email = "kreig@michaelsen.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEF8SO5XopvCbO1CbhJhQi/EWTn1SqilCKRsBPrZZ6Jip7kFpRSk/Gs8V0aAScu87jQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENQUIFNdEfZz1aaqY+FpPgBV7aIy5l4XjLxGcq9D1cPoXvH0OyjfS0d0+7Ls18/2hA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e4228796-6f70-4ba3-b574-20302f170e62",
+                            SecurityStamp = "c5ca1cb0-95ce-4b20-a2ae-34d05e238a4e",
                             TwoFactorEnabled = false,
                             UserName = "KreigMichaelsen"
                         },
@@ -495,15 +506,15 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "423d9299-209c-45ce-8942-56ba865573f7",
-                            Email = "kreig@michaelsen.com",
+                            ConcurrencyStamp = "4c2ef1aa-09a5-46ea-869b-acb890c8400a",
+                            Email = "normal@user.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEJgc0Rh/vooF1vxNSgfK27I38+6GfgutQqRmDOJTqIO2MLT3NIFImpXQ8cEmTWxo+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGXaVQn3eAkuTsIv57tf6exBAYhdc6RXvyyv46BGAuNFIZLTXcZtEULfAGbSeT90wA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a5abe609-5277-4633-befb-5d538f4966ee",
+                            SecurityStamp = "9ffcbf2d-6649-4311-a336-f4b62d83090f",
                             TwoFactorEnabled = false,
-                            UserName = "KreigMichaelsen"
+                            UserName = "NormalUser"
                         });
                 });
 
@@ -600,13 +611,71 @@ namespace BackEndCapstone.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BackEndCapstone.Models.Project", b =>
+                {
+                    b.HasOne("BackEndCapstone.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("BackEndCapstone.Models.ProjectNote", b =>
+                {
+                    b.HasOne("BackEndCapstone.Models.Project", null)
+                        .WithMany("ProjectNotes")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BackEndCapstone.Models.ProjectTask", b =>
+                {
+                    b.HasOne("BackEndCapstone.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("BackEndCapstone.Models.Project", "Project")
+                        .WithMany("ProjectTasks")
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("BackEndCapstone.Models.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("UserProfile");
+                });
+
             modelBuilder.Entity("BackEndCapstone.Models.UserProfile", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
 
+                    b.HasOne("BackEndCapstone.Models.Project", null)
+                        .WithMany("UserProfiles")
+                        .HasForeignKey("ProjectId");
+
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("BackEndCapstone.Models.UserProject", b =>
+                {
+                    b.HasOne("BackEndCapstone.Models.Project", "Project")
+                        .WithMany("UserProjects")
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("BackEndCapstone.Models.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -658,6 +727,17 @@ namespace BackEndCapstone.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BackEndCapstone.Models.Project", b =>
+                {
+                    b.Navigation("ProjectNotes");
+
+                    b.Navigation("ProjectTasks");
+
+                    b.Navigation("UserProfiles");
+
+                    b.Navigation("UserProjects");
                 });
 #pragma warning restore 612, 618
         }

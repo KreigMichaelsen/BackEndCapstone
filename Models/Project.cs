@@ -15,6 +15,7 @@ public class Project
     public List<ProjectNote> ProjectNotes { get; set; }
     public List<ProjectTask> ProjectTasks { get; set; }
     public List<UserProject> UserProjects { get; set; }
+    public List<UserProfile> UserProfiles { get; set; }
    
     
 

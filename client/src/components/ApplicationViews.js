@@ -11,6 +11,10 @@ import Tasks from "./tasks/Tasks";
 import { ProjectEditForm } from "./projects/ProjectEditForm";
 import UserProfiles from "./users/UserProfiles";
 import UserProfileDetails from "./users/UserProfileDetails";
+import UserProjects from "./userProjects/UserProjects";
+import { ProjectUserAddForm } from "./projects/ProjectUserAddForm";
+import { ProjectTaskAddForm } from "./projects/ProjectTaskAddForm";
+import { TaskEditForm } from "./tasks/TaskEditForm";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -50,6 +54,22 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
         <Route
+          path=":id/addUser"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ProjectUserAddForm/>
+            </AuthorizedRoute>
+          }
+        />
+         <Route
+          path=":id/addTask"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ProjectTaskAddForm/>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
             path="create"
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
@@ -72,6 +92,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <TaskDetails />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path=":id/edit"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <TaskEditForm/>
             </AuthorizedRoute>
           }
         />
@@ -109,6 +137,33 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               </AuthorizedRoute>
             }
             /> */}
+        </Route>
+        
+        <Route path="userProjects">
+        <Route
+        index
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <UserProjects/>
+            </AuthorizedRoute>
+          }
+        />
+        {/* <Route
+          path=":id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <UserProfileDetails />
+            </AuthorizedRoute>
+          }
+        /> */}
+        <Route
+            path="create"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <TaskCreationForm/>
+              </AuthorizedRoute>
+            }
+            />
         </Route>
         
         <Route

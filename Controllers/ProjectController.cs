@@ -50,9 +50,30 @@ public class ProjectController : ControllerBase
     // [Authorize]
     public IActionResult CreateProject(Project project)
     {
-        int newId = _dbContext.Projects.Count() > 0 ? _dbContext.Projects.Max(p => p.Id) + 1 : 1;
-        project.Id = newId;
-        _dbContext.Projects.Add(project);
+        Project newProject = new Project
+        {
+
+        Id = _dbContext.Projects.Count() > 0 ? _dbContext.Projects.Max(p => p.Id) + 1 : 1,
+        Title = project.Title,
+        CategoryId = project.CategoryId
+
+        };
+        
+        _dbContext.Projects.Add(newProject);
+
+        foreach (UserProfile userProfile in project.UserProfiles)
+        {
+             _dbContext.UserProjects.Add (new UserProject
+            {
+                
+                ProjectId = newProject.Id,
+                UserProfileId = userProfile.Id
+
+            }
+             );
+        }
+        
+
         _dbContext.SaveChanges();
         return Created($"/api/project/{project.Id}", project);
     }
@@ -61,7 +82,9 @@ public class ProjectController : ControllerBase
     // [Authorize]
     public IActionResult UpdateProject(Project project, int id)
     {
-        Project projectToUpdate = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+        Project projectToUpdate = _dbContext.Projects
+
+        .SingleOrDefault(p => p.Id == id);
         if (projectToUpdate  == null)
         {
             return NotFound();
@@ -74,7 +97,6 @@ public class ProjectController : ControllerBase
         //These are the only properties that we want to make editable
         projectToUpdate.Title = project.Title;
         projectToUpdate.CategoryId = project.CategoryId;
-        projectToUpdate.UserProjects = project.UserProjects;
 
         _dbContext.SaveChanges();
 

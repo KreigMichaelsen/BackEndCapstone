@@ -67,14 +67,8 @@ export const ProjectCreationForm = () => {
         
         const projectToPost = {
             categoryId,
-            
             title,
-
-            userProjects : userProfiles.map((up) => {
-                return {
-                    userProfileId : up.id
-                }
-            })
+            userProfiles
             
         };
 

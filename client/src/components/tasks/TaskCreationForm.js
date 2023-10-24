@@ -19,6 +19,8 @@ export const TaskCreationForm = () => {
     const [categoryId, setCategoryId] = useState(0)
     const [projectId, setProjectId] = useState(0)
     const [title, setTitle] = useState("")
+    const [dueDate, setDueDate] = useState(null)
+
 
     const navigate = useNavigate()
 
@@ -39,6 +41,7 @@ export const TaskCreationForm = () => {
             categoryId,
             projectId,
             title,
+            dueDate,
             
         };
 
@@ -107,8 +110,23 @@ export const TaskCreationForm = () => {
                         ))}
                         </Input>
                 </FormGroup>
+                <FormGroup>
+                        <Label for="exampleDatetime">Datetime</Label>
+                        <Input type="date" 
+                        name="date" 
+                        id="exampleDatetime" 
+                        placeholder="datetime placeholder"
+                        value={dueDate}
+                        onChange={(e) => {
+                        setDueDate(e.target.value)}}
+                        />
+                        
+
+                </FormGroup>
+                
+
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
-                    Create Order
+                    Create Task
                 </Button>
             </Form>
         </div>

@@ -54,29 +54,32 @@ public class ProjectTaskController : ControllerBase
         return Created($"/api/project/{projectTask.Id}", projectTask);
     }
 
-    // [HttpPut("{id}")]
-    // [Authorize]
-    // public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
-    // {
-    //     WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToUpdate == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     else if (id != workOrder.Id)
-    //     {
-    //         return BadRequest();
-    //     }
+    [HttpPut("{id}")]
+    [Authorize]
+    public IActionResult UpdateTask (ProjectTask projectTask, int id)
+    {
+        ProjectTask projectTaskToUpdate = _dbContext.ProjectTasks.SingleOrDefault(pt => pt.Id == id);
+        if (projectTaskToUpdate == null)
+        {
+            return NotFound();
+        }
+        else if (id != projectTask.Id)
+        {
+            return BadRequest();
+        }
 
-    //     //These are the only properties that we want to make editable
-    //     workOrderToUpdate.Description = workOrder.Description;
-    //     workOrderToUpdate.UserProfileId = workOrder.UserProfileId;
-    //     workOrderToUpdate.BikeId = workOrder.BikeId;
+        //These are the only properties that we want to make editable
+        projectTaskToUpdate.ProjectId = projectTask.ProjectId;
+        projectTaskToUpdate.UserProfileId = projectTask.UserProfileId;
+        projectTaskToUpdate.CategoryId = projectTask.CategoryId;
+        projectTaskToUpdate.DueDate = projectTask.DueDate;
+        projectTaskToUpdate.Title = projectTask.Title;
 
-    //     _dbContext.SaveChanges();
 
-    //     return NoContent();
-    // }
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
     // [HttpPut("{id}/complete")]
     // [Authorize]
     // public IActionResult CompleteWorkOrder(int id)
