@@ -11,15 +11,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { deleteTask } from "../../managers/projectTaskManager";
 
-export default function TaskCard({ task, getAllTasks }) {
+export default function TaskCard({ task, getAllTasks, project, getProjectDetails }) {
   const navigate = useNavigate();
 
   //^ Function to delete an order
-  const deleteTaskFunction = (id) => {
+  const deleteTaskFunction = (taskId) => {
     // Send an HTTP DELETE request to delete the work order
-    deleteTask(id) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
       .then(() => {
-        getAllTasks();
+        getProjectDetails(project.id);
       })
   };
 
@@ -36,6 +36,14 @@ export default function TaskCard({ task, getAllTasks }) {
           }}
         >
           Show Details
+        </Button>
+        <Button
+          color="dark"
+          onClick={() => {
+            navigate(`/tasks/${task.id}/edit`);
+          }}
+        >
+          Edit
         </Button>
 
         <Button

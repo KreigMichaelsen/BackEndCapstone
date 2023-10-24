@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Card, CardTitle, CardSubtitle, CardBody, CardText, Progress } from "reactstrap";
+import { Card, CardTitle, CardSubtitle, CardBody, CardText, Progress, Button } from "reactstrap";
 import { getProjectById } from "../../managers/projectManager";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TaskCard from "../tasks/TaskCard";
 import { getProjectTasks } from "../../managers/projectTaskManager";
+import UserProjectCard from "../userProjects/UserProjectCard";
 
 
 export default function ProjectDetails() {
@@ -11,6 +12,7 @@ export default function ProjectDetails() {
   const [tasks, setTasks] = useState([]);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getProjectDetails = (id) => {
     getProjectById(id).then(setProject);
@@ -37,32 +39,56 @@ export default function ProjectDetails() {
           {/* <Progress
           value={36}
           /> */}
-          
+
           <CardText>Category: {project?.category?.title}</CardText>
           <CardText>DueDate: {project?.dueDate}</CardText>
           <CardTitle tag="h4">Users</CardTitle>
+          <Button
+            color="primary"
+            onClick={() => {
+              navigate(`/projects/${project.id}/addUser`);
+            }}
+          >
+            Add User
+          </Button>
+
           <div>
             {project?.userProjects?.map((userProject) => (
-                <p key={userProject?.userProfile?.id}>
-                  {userProject?.userProfile?.fullName}
-                </p>
-                
-                
+              <UserProjectCard
+                userProject={userProject}
+                key={`userProject-${userProject.id}`}
+                getProjectDetails={getProjectDetails}
+                project={project}
+
+              >
+              </UserProjectCard>
+
+
             ))}
           </div>
-            
+
         </CardBody>
       </Card>
       <h4>Tasks</h4>
+      <Button
+            color="primary"
+            onClick={() => {
+              navigate(`/projects/${project.id}/addTask`);
+            }}
+          >
+            Add Task
+          </Button>
       {project?.projectTasks?.map((task) => (
         <TaskCard
-        task={task}
-        key={task.id}
-        getAllTasks={getAllTasks}
+          task={task}
+          key={task.id}
+          getAllTasks={getAllTasks}
+          getProjectDetails={getProjectDetails}
+          project={project}
         >
         </TaskCard>
       ))}
-    
+
     </>
   );
 }

@@ -13,6 +13,6 @@ public class ProjectTask
     public UserProfile UserProfile { get; set; }
     public int? CategoryId { get; set; }
     public Category Category { get; set; }
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
     public bool IsCompleted { get; set; }
 }

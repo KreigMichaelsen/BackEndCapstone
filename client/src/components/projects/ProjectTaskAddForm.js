@@ -2,44 +2,45 @@ import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import { createProjectTask, editTask, getProjectTaskById } from "../../managers/projectTaskManager";
+import { createProjectTask } from "../../managers/projectTaskManager";
 import { getUsers } from "../../managers/userProfileManager";
-import { getProjects } from "../../managers/projectManager";
+import { getProjectById, getProjects } from "../../managers/projectManager";
 import { getCategories } from "../../managers/categoryManager";
 
 
 
-export const TaskEditForm = () => {
-    
-    const [task, setTask] = useState(null);
+export const ProjectTaskAddForm = () => {
+
+
+    const [project, setProject] = useState(null);
 
     const [allUserProfiles, setAllUserProfiles] = useState([])
     const [allCategories, setAllCategories] = useState([])
-    const [allProjects, setAllProjects] = useState([])
+
     
     const [userProfileId, setUserProfileId] = useState(0)
     const [categoryId, setCategoryId] = useState(0)
-    const [projectId, setProjectId] = useState(0)
     const [title, setTitle] = useState("")
     const [dueDate, setDueDate] = useState(null)
 
-
-    const navigate = useNavigate()
+    
     const { id } = useParams();
 
-    const getTaskDetails = (id) => {
-        getProjectTaskById(id).then(setTask);
-      };    
-    
+    const navigate = useNavigate();
+  
+    const getProjectDetails = (id) => {
+      getProjectById(id).then(setProject);
+    };
+  
+
     useEffect(() => {
         getUsers().then(setAllUserProfiles);
-        getProjects().then(setAllProjects);
         getCategories().then(setAllCategories);
 
     }, []);
 
     useEffect(() => {
-        getTaskDetails(id);
+        getProjectDetails(id);
       
     }, [id]);
 
@@ -47,19 +48,18 @@ export const TaskEditForm = () => {
     const handleFormSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
 
-        const taskToEdit = {
-            id: task.id,
+        const taskToPost = {
             userProfileId,
             categoryId,
-            projectId,
+            projectId : project.id,
             title,
             dueDate,
             
         };
 
-        editTask(taskToEdit)
+        createProjectTask(taskToPost)
         .then(() => {
-            navigate("/tasks"); // This ensures navigation happens after order creation
+            navigate(`/projects/${project.id}`); // This ensures navigation happens after order creation
         });
     
     };
@@ -67,7 +67,7 @@ export const TaskEditForm = () => {
     return <>
         <div className="orderCreationFormContainer">
         <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Edit Task</h2>
+            <h2 className="orderFormTitle">Create A New Task for {project?.title}</h2>
             <Form>
             <FormGroup>
                     <Label for="titleInput">Title</Label>
@@ -105,20 +105,6 @@ export const TaskEditForm = () => {
                         <option value="0">Choose a Category</option>
                         {allCategories.map((category) => (
                         <option value={category.id} key={category.id}>{category.title}</option>
-                        ))}
-                        </Input>
-                </FormGroup>
-                <FormGroup>
-                        <Label for="projectSelect">Project</Label>
-                        <Input type="select" 
-                        name="project" 
-                        value={projectId}
-                        onChange={(e) => {
-                            setProjectId(parseInt(e.target.value))}}
-                        >
-                        <option value="0">Choose a Project</option>
-                        {allProjects.map((project) => (
-                        <option value={project.id} key={project.id}>{project.title}</option>
                         ))}
                         </Input>
                 </FormGroup>

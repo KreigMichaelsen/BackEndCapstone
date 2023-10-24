@@ -21,6 +21,8 @@ public class UserProjectController : ControllerBase
     public IActionResult GetProjects()
     {
         return Ok(_dbContext.UserProjects
+        .Include(up => up.Project)
+        .Include(up => up.UserProfile)
         .ToList());
     }
 
@@ -45,15 +47,15 @@ public class UserProjectController : ControllerBase
     //         return Ok(project);
     // }
 
-    // [HttpPost]
-    // // [Authorize]
-    // public IActionResult CreateProject(Project project)
-    // {
+    [HttpPost]
+    // [Authorize]
+    public IActionResult CreateUserProject(UserProject userProject)
+    {
         
-    //     _dbContext.Projects.Add(project);
-    //     _dbContext.SaveChanges();
-    //     return Created($"/api/project/{project.Id}", project);
-    // }
+        _dbContext.UserProjects.Add(userProject);
+        _dbContext.SaveChanges();
+        return Created($"/api/userproject/{userProject.Id}", userProject);
+    }
 
     // [HttpPut("{id}")]
     // [Authorize]

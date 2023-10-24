@@ -52,8 +52,8 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
             new IdentityUser
             {
             Id = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
-            UserName = "KreigMichaelsen",
-            Email = "kreig@michaelsen.com",
+            UserName = "NormalUser",
+            Email = "normal@user.com",
             PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["AdminPassword"])
             }
         });
@@ -143,14 +143,6 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
                 Id = 4,
                 Title = "Project #4",
                 CategoryId = 4,
-                DueDate = new DateTime(2023, 10, 20),
-                IsCompleted = false
-            },
-            new Project
-            {
-                Id = 5,
-                Title = "Project #5",
-                CategoryId = 5,
                 DueDate = new DateTime(2023, 10, 20),
                 IsCompleted = false
             },
