@@ -24,6 +24,22 @@ public class UserProfileController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{projectId}/userProfilesNotInProject")]
+    // [Authorize]
+    public IActionResult GetUserProfilesNotInProject(int projectId)
+    {
+        var userProfileIdsInProject = _dbContext.UserProjects
+        .Where(up => up.ProjectId == projectId)
+        .Select(up => up.UserProfileId)
+        .ToList();
+
+        var userProfilesNotInProject = _dbContext.UserProfiles
+        .Where(up => !userProfileIdsInProject.Contains(up.Id))
+        .ToList();
+
+        return Ok(userProfilesNotInProject);
+    }
+
     [HttpGet("{id}")]
     // [Authorize]
     public IActionResult GetById(int id)

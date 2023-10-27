@@ -9,12 +9,12 @@ export default function TaskDetails() {
   const [task, setTask] = useState(null);
   const { id } = useParams();
 
-  const getProjectDetails = (id) => {
+  const getProjectTaskDetails = (id) => {
     getProjectTaskById(id).then(setTask);
   };
 
   useEffect(() => {
-      getProjectDetails(id);
+      getProjectTaskDetails(id);
     
   }, [id]);
 

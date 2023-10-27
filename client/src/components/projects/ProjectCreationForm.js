@@ -145,6 +145,14 @@ export const ProjectCreationForm = () => {
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                     Create Project
                 </Button>
+                <Button
+                color="danger"
+                onClick={() => {
+                    navigate(`/projects`)
+                }}
+                >
+                Cancel
+                </Button>
             </Form>
         </div>
         </div>

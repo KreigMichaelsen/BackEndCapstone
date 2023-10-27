@@ -15,6 +15,11 @@ import UserProjects from "./userProjects/UserProjects";
 import { ProjectUserAddForm } from "./projects/ProjectUserAddForm";
 import { ProjectTaskAddForm } from "./projects/ProjectTaskAddForm";
 import { TaskEditForm } from "./tasks/TaskEditForm";
+import Notes from "./notes/Notes";
+import { NoteCreationForm } from "./notes/NoteCreationForm";
+import { ProjectNoteAddForm } from "./projects/ProjectNoteAddForm";
+import HomePage from "./homepage/HomePage";
+
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -24,7 +29,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              Filler Text
+             <HomePage/>
             </AuthorizedRoute>
           }
         />
@@ -70,6 +75,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
         <Route
+          path=":id/addNote"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <ProjectNoteAddForm loggedInUser={loggedInUser}/>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
             path="create"
             element={
               <AuthorizedRoute loggedInUser={loggedInUser}>
@@ -111,6 +124,42 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               </AuthorizedRoute>
             }
             />
+         </Route>
+        <Route path="notes">
+        <Route
+        index
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <Notes />
+            </AuthorizedRoute>
+          }
+        />
+        {/* <Route
+          path=":id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <TaskDetails />
+            </AuthorizedRoute>
+          }
+        /> */}
+        <Route
+          path=":id/edit"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <TaskEditForm/>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+            path="create"
+            element={
+              <AuthorizedRoute loggedInUser={loggedInUser}>
+                <NoteCreationForm
+                loggedInUser={loggedInUser}
+                />
+              </AuthorizedRoute>
+            }
+            />
         </Route>
         <Route path="users">
         <Route
@@ -143,7 +192,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         <Route
         index
           element={
-            <AuthorizedRoute loggedInUser={loggedInUser}>
+            <AuthorizedRoute roles={["Admin"]} loggedInUser={loggedInUser}>
               <UserProjects/>
             </AuthorizedRoute>
           }

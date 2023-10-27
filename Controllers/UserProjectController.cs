@@ -26,6 +26,43 @@ public class UserProjectController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{projectId}/forProject")]
+    // [Authorize]
+    public IActionResult GetUserProjectsForProject(int projectId)
+    {
+        return Ok(_dbContext.UserProjects
+        .Include(up => up.UserProfile)
+        .Where(up => up.ProjectId == projectId)
+        .ToList());
+    }
+
+    [HttpGet("{projectId}/notForProject")]
+    // [Authorize]
+    public IActionResult GetUserProjectsNotForProject(int projectId)
+    {
+        var userProfilesAssociatedWithProject = _dbContext.UserProjects
+        .Where(up => up.ProjectId == projectId)
+        .Select(up => up.UserProfileId)
+        .ToList();
+
+    var userProjectsNotForProject = _dbContext.UserProjects
+        .Include(up => up.UserProfile)
+        .Where(up => up.ProjectId != projectId && !userProfilesAssociatedWithProject.Contains(up.UserProfileId))
+        .ToList();
+
+    return Ok(userProjectsNotForProject);
+    }
+
+    //     [HttpGet("{projectId}/notForProject")]
+    // // [Authorize]
+    // public IActionResult GetUserProjectsNotForProject(int projectId)
+    // {
+    //     return Ok(_dbContext.UserProjects
+    //     .Include(up => up.UserProfile)
+    //     .Where(up => up.ProjectId != projectId)
+    //     .ToList());
+    // }
+
     // [HttpGet("{id}")]
     // // [Authorize]
     // public IActionResult GetById(int id)

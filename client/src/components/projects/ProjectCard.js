@@ -28,6 +28,8 @@ export default function ProjectCard({ project, getAllProjects }) {
         <CardSubtitle className="mb-2 text-muted" tag="h6">
           Category: {project?.category?.title}
         </CardSubtitle>
+      
+     
 
         {/* <Progress
         value={36}
@@ -37,7 +39,7 @@ export default function ProjectCard({ project, getAllProjects }) {
           onClick={() => {
             navigate(`/projects/${project.id}`);
           }}
-        >
+        > 
           Show Details
         </Button>
         <Button

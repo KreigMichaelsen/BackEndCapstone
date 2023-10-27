@@ -9,52 +9,55 @@ import {
 } from "reactstrap";
 
 import { useNavigate } from "react-router-dom";
-import { completeTask, deleteTask } from "../../managers/projectTaskManager";
+import { deleteNote } from "../../managers/projectNoteManager";
 
-export default function TaskCard({ task, getAllTasks, project, getProjectDetails, getAllTasksForProject }) {
+
+export default function NoteCard({  note, getAllNotes }) {
   const navigate = useNavigate();
 
   //^ Function to delete an order
-  const deleteTaskFunction = (taskId) => {
+  const deleteNoteFunction = (noteId) => {
     // Send an HTTP DELETE request to delete the work order
-    deleteTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteNote(noteId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
       .then(() => {
-        getAllTasks();
+        getAllNotes();
       })
   };
 
-    //^ Function to delete an order
-    const completeTaskFunction = (taskId) => {
-      // Send an HTTP DELETE request to delete the work order
-      completeTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
-        .then(() => {
-          getAllTasks();
-        })
-    };
+//     //^ Function to delete an order
+//     const completeTaskFunction = (taskId) => {
+//       // Send an HTTP DELETE request to delete the work order
+//       completeTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+//         .then(() => {
+//           getAllTasks();
+//         })
+//     };
 
   return (
     <Card color="dark" outline style={{ marginBottom: "4px" }}>
       <CardBody>
-        <CardTitle tag="h5">{task.title}</CardTitle>
-        <CardText>Completed? {task.isCompleted? "Yes" : "No"}</CardText>
+        <CardTitle tag="h5">{note.title}</CardTitle>
+        <CardText>{note?.project?.title}</CardText>
+        <CardText>{note.body}</CardText>
+        <CardText>User: {note?.userProfile?.fullName}</CardText>
         
-        <Button
+        {/* <Button
           color="dark"
           onClick={() => {
             navigate(`/tasks/${task.id}`);
           }}
         >
           Show Details
-        </Button>
+        </Button> */}
         <Button
           color="dark"
           onClick={() => {
-            navigate(`/tasks/${task.id}/edit`);
+            navigate(`/notes/${note.id}/edit`);
           }}
         >
           Edit
         </Button>
-        { task.isCompleted
+        {/* { task.isCompleted
             ? <><i className="fa-solid fa-check"></i> Done! </>
              :
              <Button
@@ -64,14 +67,14 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
            >
              Complete Task
            </Button>
-        }
+        } */}
 
         <Button
-          onClick={() => deleteTaskFunction(task.id)}
+          onClick={() => deleteNoteFunction(note.id)}
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Task
+          Delete Note
         </Button>
       </CardBody>
     </Card>

@@ -9,6 +9,16 @@ export const getUserProjectById = (id) => {
   
 };
 
+export const getUserProjectsByProjectId = (id) => {
+  return fetch(`${apiUrl}/${id}/forProject`).then((res) => res.json());
+  
+};
+
+export const getUserProjectsNotAssociatedByProjectWithId = (id) => {
+  return fetch(`${apiUrl}/${id}/notForProject`).then((res) => res.json());
+  
+};
+
 // export const editUserProject = (project) => {
 //   return fetch(`${apiUrl}/${project.id}`, {
 //     method: "PUT",

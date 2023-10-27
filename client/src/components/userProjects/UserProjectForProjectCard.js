@@ -9,15 +9,15 @@ import {
   Progress,
 } from "reactstrap";
 
-import { deleteUserProject } from "../../managers/userProjectManager";
+import { deleteUserProject, getUserProjectsByProjectId } from "../../managers/userProjectManager";
 
-export default function UserProjectCard({ userProject, getAllUserProjects, getProjectDetails, project }) {
+export default function UserProjectForProjectCard({ userProject, getAllUserProjects, getProjectDetails, project, getAllUsersForProject }) {
 
   const deleteProjectFunction = (userProjectId) => {
     // Send an HTTP DELETE request to delete the work order
     deleteUserProject(userProjectId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
       .then(() => {
-        getAllUserProjects();
+        getAllUsersForProject(project.id);
       })
   };
 

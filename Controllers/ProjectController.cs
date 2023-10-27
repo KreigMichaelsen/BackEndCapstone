@@ -22,6 +22,8 @@ public class ProjectController : ControllerBase
     {
         return Ok(_dbContext.Projects
         .Include(p => p.Category)
+        .Include(p => p.UserProjects)
+        .ThenInclude(up => up.UserProfile)
         .ToList());
     }
 
@@ -36,6 +38,7 @@ public class ProjectController : ControllerBase
             .Include(p => p.ProjectTasks)
             .Include(p => p.UserProjects)
             .ThenInclude(up => up.UserProfile)
+            .Include(p => p.UserProfiles)
             .SingleOrDefault(p => p.Id == id);
 
         if (project == null)

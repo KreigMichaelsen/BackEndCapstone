@@ -39,22 +39,27 @@ return (
                   </NavLink>
                 </NavItem>
                 <NavItem onClick={() => setOpen(false)}>
+                  <NavLink tag={RRNavLink} to="/notes">
+                    Notes
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setOpen(false)}>
                   <NavLink tag={RRNavLink} to="/users">
                     Users
                   </NavLink>
                 </NavItem>
-                <NavItem onClick={() => setOpen(false)}>
+                {/* <NavItem onClick={() => setOpen(false)}>
                   <NavLink tag={RRNavLink} to="/userProjects">
                     User Projects
                   </NavLink>
-                </NavItem>
-                {/* {loggedInUser.roles.includes("Admin") && (
+                </NavItem> */}
+                {loggedInUser.roles.includes("Admin") && (
                   <NavItem onClick={() => setOpen(false)}>
-                    <NavLink tag={RRNavLink} to="/employees">
-                      Employees
+                    <NavLink tag={RRNavLink} to="/userProjects">
+                      User Projects
                     </NavLink>
                   </NavItem>
-                )} */}
+                )}
               </Nav>
             </Collapse>
             <Button

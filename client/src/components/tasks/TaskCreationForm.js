@@ -128,6 +128,14 @@ export const TaskCreationForm = () => {
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                     Create Task
                 </Button>
+                <Button
+                color="danger"
+                onClick={() => {
+                    navigate(`/tasks`)
+                }}
+                >
+                Cancel
+                </Button>
             </Form>
         </div>
         </div>
