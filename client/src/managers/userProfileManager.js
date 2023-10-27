@@ -4,6 +4,10 @@ export const getUsers = () => {
   return fetch(apiUrl).then((res) => res.json());
 };
 
+export const getUsersNotAssociatedWithProject = (projectId) => {
+  return fetch(`${apiUrl}/${projectId}/userProfilesNotInProject`).then((res) => res.json());
+};
+
 export const getUserById = (id) => {
   return fetch(`${apiUrl}/${id}`).then((res) => res.json());
   

@@ -6,6 +6,10 @@ export const getProjectTasks = () => {
 
 export const getProjectTaskById = (id) => {
   return fetch(`${apiUrl}/${id}`).then((res) => res.json());
+};
+
+export const getProjectTaskByProjectId = (id) => {
+  return fetch(`${apiUrl}/${id}/forProject`).then((res) => res.json());
   
 };
 
@@ -33,5 +37,15 @@ export const editTask = (task) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(task),
+  });
+};
+
+export const completeTask = (id) => {
+  return fetch(`${apiUrl}/${id}/complete`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
   });
 };

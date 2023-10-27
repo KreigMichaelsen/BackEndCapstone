@@ -2,45 +2,41 @@ import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import { createProjectTask } from "../../managers/projectTaskManager";
+import { createProjectTask, editTask, getProjectTaskById } from "../../managers/projectTaskManager";
 import { getUsers } from "../../managers/userProfileManager";
-import { getProjectById, getProjects } from "../../managers/projectManager";
+import { getProjects } from "../../managers/projectManager";
 import { getCategories } from "../../managers/categoryManager";
+import { editNote } from "../../managers/projectNoteManager";
 
 
 
-export const ProjectTaskAddForm = () => {
-
-
-    const [project, setProject] = useState(null);
-
+export const NoteEditForm = () => {
+    
+    const [note, setNote] = useState(null);
     const [allUserProfiles, setAllUserProfiles] = useState([])
-    const [allCategories, setAllCategories] = useState([])
-
+    const [allProjects, setAllProjects] = useState([])
     
     const [userProfileId, setUserProfileId] = useState(0)
-    const [categoryId, setCategoryId] = useState(0)
+    const [projectId, setProjectId] = useState(0)
     const [title, setTitle] = useState("")
-    const [dueDate, setDueDate] = useState(null)
+    const [body, setBody] = useState("")
 
-    
+
+    const navigate = useNavigate()
     const { id } = useParams();
 
-    const navigate = useNavigate();
-  
-    const getProjectDetails = (id) => {
-      getProjectById(id).then(setProject);
-    };
-  
-
+    const getNoteDetails = (id) => {
+        getProjectNoteById(id).then(setNote);
+      };    
+    
     useEffect(() => {
         getUsers().then(setAllUserProfiles);
-        getCategories().then(setAllCategories);
+        getProjects().then(setAllProjects);
 
     }, []);
 
     useEffect(() => {
-        getProjectDetails(id);
+        getNoteDetails(id);
       
     }, [id]);
 
@@ -48,18 +44,18 @@ export const ProjectTaskAddForm = () => {
     const handleFormSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
 
-        const taskToPost = {
+        const noteToEdit = {
+            id: note.id,
             userProfileId,
-            categoryId,
-            projectId : project.id,
+            projectId,
             title,
-            dueDate,
+            body,
             
         };
 
-        createProjectTask(taskToPost)
+        editNote(noteToEdit)
         .then(() => {
-            navigate(`/projects/${project.id}`); // This ensures navigation happens after order creation
+            navigate("/notes"); // This ensures navigation happens after order creation
         });
     
     };
@@ -67,7 +63,7 @@ export const ProjectTaskAddForm = () => {
     return <>
         <div className="orderCreationFormContainer">
         <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Create A New Task for {project?.title}</h2>
+            <h2 className="orderFormTitle">Edit Note</h2>
             <Form>
             <FormGroup>
                     <Label for="titleInput">Title</Label>
@@ -79,6 +75,17 @@ export const ProjectTaskAddForm = () => {
                     >
                     </Input>
                 </FormGroup>
+                <FormGroup>
+                        <Label for="bodyInput">Note Body</Label>
+                        <Input type="textarea"
+                            name="body"
+                            value={body}
+                            onChange={(e) => {
+                                setBody(e.target.value)
+                            }}
+                        >
+                        </Input>
+                    </FormGroup>
                 <FormGroup>
                     <Label for="userSelect">User</Label>
                     <Input 
@@ -95,44 +102,23 @@ export const ProjectTaskAddForm = () => {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                        <Label for="categorySelect">Category</Label>
+                        <Label for="projectSelect">Project</Label>
                         <Input type="select" 
-                        name="category" 
-                        value={categoryId}
+                        name="project" 
+                        value={projectId}
                         onChange={(e) => {
-                            setCategoryId(parseInt(e.target.value))}}
+                            setProjectId(parseInt(e.target.value))}}
                         >
-                        <option value="0">Choose a Category</option>
-                        {allCategories.map((category) => (
-                        <option value={category.id} key={category.id}>{category.title}</option>
+                        <option value="0">Choose a Project</option>
+                        {allProjects.map((project) => (
+                        <option value={project.id} key={project.id}>{project.title}</option>
                         ))}
                         </Input>
-                </FormGroup>
-                <FormGroup>
-                        <Label for="exampleDatetime">Datetime</Label>
-                        <Input type="date" 
-                        name="date" 
-                        id="exampleDatetime" 
-                        placeholder="datetime placeholder"
-                        value={dueDate}
-                        onChange={(e) => {
-                        setDueDate(e.target.value)}}
-                        />
-                        
-
                 </FormGroup>
                 
 
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                     Create Task
-                </Button>
-                <Button
-                color="danger"
-                onClick={() => {
-                    navigate(`/projects/${project.id}`)
-                }}
-                >
-                Cancel
                 </Button>
             </Form>
         </div>

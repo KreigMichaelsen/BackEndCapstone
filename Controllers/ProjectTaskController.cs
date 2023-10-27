@@ -24,6 +24,15 @@ public class ProjectTaskController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{projectId}/forProject")]
+    // [Authorize]
+    public IActionResult GetTasksForProject(int projectId)
+    {
+        return Ok(_dbContext.ProjectTasks
+        .Where(pt => pt.ProjectId == projectId)
+        .ToList());
+    }
+
     [HttpGet("{id}")]
     // [Authorize]
     public IActionResult GetById(int id)
@@ -51,7 +60,7 @@ public class ProjectTaskController : ControllerBase
         projectTask.Id = newId;
         _dbContext.ProjectTasks.Add(projectTask);
         _dbContext.SaveChanges();
-        return Created($"/api/project/{projectTask.Id}", projectTask);
+        return Created($"/api/projectTask/{projectTask.Id}", projectTask);
     }
 
     [HttpPut("{id}")]
@@ -80,24 +89,24 @@ public class ProjectTaskController : ControllerBase
 
         return NoContent();
     }
-    // [HttpPut("{id}/complete")]
+    [HttpPut("{id}/complete")]
     // [Authorize]
-    // public IActionResult CompleteWorkOrder(int id)
-    // {
-    //     WorkOrder workOrderToComplete = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToComplete == null)
-    //     {
-    //         return NotFound();
-    //     }
+    public IActionResult CompleteTask(int id)
+    {
+        ProjectTask projectTaskToComplete = _dbContext.ProjectTasks.SingleOrDefault(wo => wo.Id == id);
+        if (projectTaskToComplete == null)
+        {
+            return NotFound();
+        }
 
-    //     //These are the only properties that we want to make editable
-    //     workOrderToComplete.DateCompleted = DateTime.Now;
+        //These are the only properties that we want to make editable
+       projectTaskToComplete.IsCompleted = true;
         
 
-    //     _dbContext.SaveChanges();
+        _dbContext.SaveChanges();
 
-    //     return NoContent();
-    // }
+        return NoContent();
+    }
 
     [HttpDelete("{id}")]
     // [Authorize]
