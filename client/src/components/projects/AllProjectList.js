@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { getProjects, getProjectsByUserId } from "../../managers/projectManager";
+import { getProjects } from "../../managers/projectManager";
 import ProjectCard from "./ProjectCard";
 
-export default function ProjectList({loggedInUser}) {
+export default function AllProjectList() {
   const [projects, setProjects] = useState([]);
 
-  const Id = loggedInUser.id;
+
   const getAllProjects = () => {
-    getProjectsByUserId(Id).then(setProjects);
+    getProjects().then(setProjects);
   };
 
   useEffect(() => {

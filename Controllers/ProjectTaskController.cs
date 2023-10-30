@@ -24,6 +24,16 @@ public class ProjectTaskController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{userid}/forUser")]
+    // [Authorize]
+    public IActionResult GetTasksForUser(int userid)
+    {
+        var tasksForUser = _dbContext.ProjectTasks
+        .Where(pt => pt.UserProfileId == userid)
+        .ToList();
+        return Ok(tasksForUser);
+    }
+
     [HttpGet("{projectId}/forProject")]
     // [Authorize]
     public IActionResult GetTasksForProject(int projectId)

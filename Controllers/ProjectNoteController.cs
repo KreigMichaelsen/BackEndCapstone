@@ -36,24 +36,22 @@ public class ProjectNoteController : ControllerBase
         .ToList());
     }
 
-    // [HttpGet("{id}")]
-    // // [Authorize]
-    // public IActionResult GetById(int id)
-    // {
-    //     ProjectTask projectTask = _dbContext
-    //         .ProjectTasks
-    //         .Include(pt => pt.Category)
-    //         .Include(pt => pt.UserProfile)
-    //         .Include(pt => pt.Project)
-    //         .SingleOrDefault(p => p.Id == id);
+    [HttpGet("{id}")]
+    // [Authorize]
+    public IActionResult GetById(int id)
+    {
+        ProjectNote projectNote = _dbContext.ProjectNotes
+            .Include(pt => pt.UserProfile)
+            .Include(pt => pt.Project)
+            .SingleOrDefault(p => p.Id == id);
 
-    //     if (projectTask == null)
-    //     {
-    //         return NotFound();
-    //     }
+        if (projectNote == null)
+        {
+            return NotFound();
+        }
 
-    //         return Ok(projectTask);
-    // }
+            return Ok(projectNote);
+    }
 
     [HttpPost]
     // [Authorize]
@@ -66,7 +64,7 @@ public class ProjectNoteController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize]
+    // [Authorize]
     public IActionResult UpdateNote (ProjectNote projectNote, int id)
     {
         ProjectNote projectNoteToUpdate = _dbContext.ProjectNotes.SingleOrDefault(pt => pt.Id == id);

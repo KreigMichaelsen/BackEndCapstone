@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
-import { getProjectTasks, getProjectTasksByUserId } from "../../managers/projectTaskManager";
+import { getProjectTasks } from "../../managers/projectTaskManager";
 import { Button } from "reactstrap";
 
-export default function TaskList({loggedInUser}) {
+export default function AllTaskList() {
   const [tasks, setTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [completed, setCompleted] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  const Id = loggedInUser.id;
+
 
   const getAllTasks = () => {
-    getProjectTasksByUserId(Id).then((t) => {
+    getProjectTasks().then((t) => {
       if (showCompleted === true) {
         const completedTasks = t.filter(t => t.isCompleted);
         setTasks(completedTasks);

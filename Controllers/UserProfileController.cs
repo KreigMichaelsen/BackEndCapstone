@@ -21,7 +21,23 @@ public class UserProfileController : ControllerBase
     public IActionResult GetUserProfiles()
     {
         return Ok(_dbContext.UserProfiles
+        .Include(up => up.UserProjects)
         .ToList());
+    }
+    [HttpGet("{projectId}/userProfilesInProject")]
+    // [Authorize]
+    public IActionResult GetUserProfilesInProject(int projectId)
+    {
+        var userProfileIdsInProject = _dbContext.UserProjects
+        .Where(up => up.ProjectId == projectId)
+        .Select(up => up.UserProfileId)
+        .ToList();
+
+        var userProfilesInProject = _dbContext.UserProfiles
+        .Where(up => userProfileIdsInProject.Contains(up.Id))
+        .ToList();
+
+        return Ok(userProfilesInProject);
     }
 
     [HttpGet("{projectId}/userProfilesNotInProject")]
