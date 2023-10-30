@@ -20,6 +20,9 @@ export default function ProjectDetails() {
   const [showCompleted, setShowCompleted] = useState(false);
   const [projectNotesForProject, setProjectNotesForProject] = useState([]);
   const [userProjectsForProject, setUserProjectsForProject] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [allTasksForProject, setAllTasksForProject] = useState([]);
+  // const [completedTasks, setCompletedTasks] = useState(0);
   
 
   const { id } = useParams();
@@ -37,11 +40,11 @@ export default function ProjectDetails() {
     getUserProjectsByProjectId(id).then(setUserProjectsForProject);
   };
 
-  // const getAllTasksForProject = (id) => {
-  //   getProjectTaskByProjectId(id).then(setTasksForProject); // Replace getOrders with your actual method to fetch orders
-  // };
-
   const getAllTasksForProject = (id) => {
+    getProjectTaskByProjectId(id).then(setAllTasksForProject); // Replace getOrders with your actual method to fetch orders
+  };
+
+  const getTasksForProject = (id) => {
     getProjectTaskByProjectId(id).then((tasks) => {
       if (showCompleted === true) {
         const completedTasks = tasks.filter(task => task.isCompleted);
@@ -59,55 +62,45 @@ export default function ProjectDetails() {
 
   useEffect(() => {
       getProjectDetails(id);
-      getAllTasksForProject(id);
+      getTasksForProject(id);
       getAllNotesForProject(id);
       getAllUsersForProject(id);
+      getAllTasksForProject(id)
       
     
   }, [id, showCompleted]);
 
+  useEffect(() => {
+    
+    getAllTasksForProject(id)
+    
+  
+}, []);
 
 
+
+  useEffect(() => {
+
+   // Calculate progress percentage
+   const completedTasks = allTasksForProject.filter(task => task.isCompleted).length;
+   const totalTasks = allTasksForProject.length;
+   const calculatedProgress = (completedTasks / totalTasks) * 100;
+   setProgress(calculatedProgress);
+
+   
+
+  }, [allTasksForProject, tasksForProject]);
 
   useEffect(() => {
 
    
     setFilteredTasksForProject(tasksForProject);
 
+  //  // Calculate completed tasks
+  //  const completedTasksCount = tasksForProject.filter(task => task.isCompleted).length;
+  //  setCompletedTasks(completedTasksCount);
+
   }, [tasksForProject]);
-
-
-//   useEffect(
-//     () => {
-//         if (completed) {
-//             const finishedTasks = tasksForProject.filter(task => task.isCompleted === true)
-//             setFilteredTasksForProject(finishedTasks)
-//         }
-//         else {
-//             const unfinishedTasks = tasksForProject.filter(task => task.isCompleted === false)
-//             setFilteredTasksForProject(unfinishedTasks)
-//             // getAllFilteredUserCoffeeShops()
-//         }
-//     },
-//     [completed]
-// )
-
-// useEffect(
-//   () => {
-//       if (incompleted) 
-//       {
-//         const unfinishedTasks = tasksForProject.filter(task => task.isCompleted === false)
-//         setFilteredTasksForProject(unfinishedTasks)
-//       }
-//       else 
-//       {
-//         const finishedTasks = tasksForProject.filter(task => task.isCompleted === true)
-//         setFilteredTasksForProject(finishedTasks)
-          
-//       }
-//   },
-//   [incompleted]
-// )
 
 
 
@@ -119,12 +112,10 @@ export default function ProjectDetails() {
       <Card color="dark" inverse>
         <CardBody>
           <CardTitle tag="h4">Details</CardTitle>
-          {/* <Progress
-          value={36}
-          /> */}
+          <Progress value={progress} />
 
           <CardText>Category: {project?.category?.title}</CardText>
-          <CardText>DueDate: {project?.dueDate}</CardText>
+          {/* <CardText>DueDate: {project?.dueDate}</CardText> */}
           <CardTitle tag="h4">Users</CardTitle>
           <Button
             color="primary"
@@ -172,6 +163,7 @@ export default function ProjectDetails() {
       <TaskForProjectCard
           task={task}
           key={task.id}
+          getTasksForProject={getTasksForProject}
           getAllTasksForProject={getAllTasksForProject}
           project={project}
       >

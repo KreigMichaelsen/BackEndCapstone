@@ -19,7 +19,7 @@ export const TaskCreationForm = () => {
     const [categoryId, setCategoryId] = useState(0)
     const [projectId, setProjectId] = useState(0)
     const [title, setTitle] = useState("")
-    const [dueDate, setDueDate] = useState(null)
+    const [dueDate, setDueDate] = useState("")
 
 
     const navigate = useNavigate()

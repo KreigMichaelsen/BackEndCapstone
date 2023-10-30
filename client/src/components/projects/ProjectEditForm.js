@@ -21,21 +21,28 @@ export const ProjectEditForm = () => {
 
     const navigate = useNavigate()
 
-    const getProjectDetails = (id) => {
-        getProjectById(id).then(setProject) 
-      };
+    // const getProjectDetails = (id) => {
+    //     getProjectById(id).then(setProject) 
+    //   };
 
     const getAllCategories = () => {
         getCategories().then(setAllCategories); // Replace getOrders with your actual method to fetch orders
     };
     
-      useEffect(() => {
+    //   useEffect(() => {
         
-        getAllCategories();
-      }, []);
+    //     getAllCategories();
+    //   }, []);
 
       useEffect(() => {
-        getProjectDetails(id);
+        // getProjectDetails(id);
+        getAllCategories();
+
+        getProjectById(id).then((project) => {
+            setProject(project);
+            setCategoryId(project.categoryId);
+            setTitle(project.title);
+        });
       
     }, [id]);
 
@@ -95,6 +102,14 @@ export const ProjectEditForm = () => {
 
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                     Edit Project
+                </Button>
+                <Button
+                color="danger"
+                onClick={() => {
+                    navigate(`/projects`)
+                }}
+                >
+                Cancel
                 </Button>
             </Form> 
         </div>

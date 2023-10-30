@@ -26,17 +26,28 @@ export const NoteEditForm = () => {
     const getNoteDetails = (id) => {
         getProjectNoteById(id).then(setNote);
       };    
+
+
     
     useEffect(() => {
         getUsers().then(setAllUserProfiles);
         getProjects().then(setAllProjects);
 
-    }, []);
+        getProjectNoteById(id).then((note) => {
+            setNote(note);
+            setUserProfileId(note.userProfileId);
+            setProjectId(note.projectId);
+            setTitle(note.title);
+            setBody(note.body);
+        });
 
-    useEffect(() => {
-        getNoteDetails(id);
-      
+
     }, [id]);
+
+    // useEffect(() => {
+    //     getNoteDetails(id);
+      
+    // }, [id]);
 
 
     const handleFormSubmit = (event) => {
@@ -116,7 +127,15 @@ export const NoteEditForm = () => {
                 
 
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
-                    Create Task
+                    Save Note
+                </Button>
+                <Button
+                color="danger"
+                onClick={() => {
+                    navigate(`/notes`)
+                }}
+                >
+                Cancel
                 </Button>
             </Form>
         </div>

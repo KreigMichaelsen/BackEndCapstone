@@ -21,7 +21,7 @@ export const ProjectTaskAddForm = () => {
     const [userProfileId, setUserProfileId] = useState(0)
     const [categoryId, setCategoryId] = useState(0)
     const [title, setTitle] = useState("")
-    const [dueDate, setDueDate] = useState(null)
+    const [dueDate, setDueDate] = useState("")
 
     
     const { id } = useParams();

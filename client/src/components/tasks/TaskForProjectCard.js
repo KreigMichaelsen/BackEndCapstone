@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { completeTask, deleteTask } from "../../managers/projectTaskManager";
 
-export default function TaskForProjectCard({ task, getAllTasks, project, getProjectDetails, getAllTasksForProject }) {
+export default function TaskForProjectCard({ task, getAllTasks, project, getProjectDetails, getAllTasksForProject, getTasksForProject }) {
   const navigate = useNavigate();
 
   //^ Function to delete an order
@@ -19,7 +19,9 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
     // Send an HTTP DELETE request to delete the work order
     deleteTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
       .then(() => {
+        getTasksForProject(project.id);
         getAllTasksForProject(project.id);
+        // getProjectDetails(project.id);
       })
   };
 
@@ -28,7 +30,9 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
       // Send an HTTP DELETE request to delete the work order
       completeTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
         .then(() => {
+          getTasksForProject(project.id);
           getAllTasksForProject(project.id);
+          // getProjectDetails(project.id);
         })
     };
 

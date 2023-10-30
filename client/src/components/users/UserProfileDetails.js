@@ -35,6 +35,8 @@ export default function UserProfileDetails() {
       <Card color="dark" inverse>
         <CardBody>
           <CardTitle tag="h4">Details</CardTitle>
+          <CardText>First Name: {user?.firstName}</CardText>
+          <CardText>Last Name: {user?.lastName}</CardText>
           {/* <Progress
           value={36}
           /> */}
