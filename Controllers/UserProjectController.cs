@@ -25,6 +25,16 @@ public class UserProjectController : ControllerBase
         .Include(up => up.UserProfile)
         .ToList());
     }
+    [HttpGet("{userId}/forUser")]
+    // [Authorize]
+    public IActionResult GetProjectsForUser(int userId)
+    {
+        var userProjectsAssociatedWithLoggedInUser = _dbContext.UserProjects
+        .Where(up => up.UserProfileId == userId)
+        .ToList();
+
+    return Ok(userProjectsAssociatedWithLoggedInUser);
+    }
 
     [HttpGet("{projectId}/forProject")]
     // [Authorize]
@@ -88,7 +98,8 @@ public class UserProjectController : ControllerBase
     // [Authorize]
     public IActionResult CreateUserProject(UserProject userProject)
     {
-        
+        int newId = _dbContext.UserProjects.Count() > 0 ? _dbContext.UserProjects.Max(p => p.Id) + 1 : 1;
+        userProject.Id = newId;
         _dbContext.UserProjects.Add(userProject);
         _dbContext.SaveChanges();
         return Created($"/api/userproject/{userProject.Id}", userProject);

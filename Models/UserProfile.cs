@@ -20,6 +20,8 @@ public class UserProfile
 
     public IdentityUser IdentityUser { get; set; }
 
+    public List<UserProject> UserProjects { get; set; }
+
     public string FullName 
 
     {

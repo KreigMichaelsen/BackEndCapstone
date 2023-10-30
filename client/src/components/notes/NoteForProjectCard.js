@@ -41,14 +41,14 @@ export default function NoteForProjectCard({  note, getAllNotes, getAllNotesForP
         <CardText>{note.body}</CardText>
         <CardText>User: {note?.userProfile?.fullName}</CardText>
         
-        {/* <Button
+        <Button
           color="dark"
           onClick={() => {
-            navigate(`/tasks/${task.id}`);
+            navigate(`/notes/${note.id}`);
           }}
         >
           Show Details
-        </Button> */}
+        </Button>
         <Button
           color="dark"
           onClick={() => {

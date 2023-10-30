@@ -21,7 +21,7 @@ return (
     <div>
     <Navbar color="light" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-        Back End Capstone
+        Good As Done
         </NavbarBrand>
         {loggedInUser ? (
         <>
@@ -30,12 +30,12 @@ return (
             <Nav navbar>
                 <NavItem onClick={() => setOpen(false)}>
                   <NavLink tag={RRNavLink} to="/projects">
-                    Projects
+                    My Projects
                   </NavLink>
                 </NavItem>
                 <NavItem onClick={() => setOpen(false)}>
                   <NavLink tag={RRNavLink} to="/tasks">
-                    Tasks
+                    My Tasks
                   </NavLink>
                 </NavItem>
                 <NavItem onClick={() => setOpen(false)}>
@@ -57,6 +57,21 @@ return (
                   <NavItem onClick={() => setOpen(false)}>
                     <NavLink tag={RRNavLink} to="/userProjects">
                       User Projects
+                      
+                    </NavLink>
+                  </NavItem>
+                )}
+                {loggedInUser.roles.includes("Admin") && (
+                  <NavItem onClick={() => setOpen(false)}>
+                    <NavLink tag={RRNavLink} to="/AllProjects">
+                      All Projects
+                    </NavLink>
+                  </NavItem>
+                )}
+                 {loggedInUser.roles.includes("Admin") && (
+                  <NavItem onClick={() => setOpen(false)}>
+                    <NavLink tag={RRNavLink} to="/AllTasks">
+                      All Tasks
                     </NavLink>
                   </NavItem>
                 )}

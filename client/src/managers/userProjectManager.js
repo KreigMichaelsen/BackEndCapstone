@@ -14,6 +14,11 @@ export const getUserProjectsByProjectId = (id) => {
   
 };
 
+export const getUserProjectsByUserId = (id) => {
+  return fetch(`${apiUrl}/${id}/forUser`).then((res) => res.json());
+  
+};
+
 export const getUserProjectsNotAssociatedByProjectWithId = (id) => {
   return fetch(`${apiUrl}/${id}/notForProject`).then((res) => res.json());
   

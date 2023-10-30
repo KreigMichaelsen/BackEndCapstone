@@ -27,6 +27,24 @@ public class ProjectController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("{userid}/forUser")]
+    // [Authorize]
+    public IActionResult GetProjectsForUser(int userid)
+    {
+        var userProjects = _dbContext.UserProjects
+        .Where(up => up.UserProfileId == userid)
+        .Select(up => up.ProjectId);
+
+    var projectsForUser = _dbContext.Projects
+        .Include(p => p.Category)
+        .Include(p => p.UserProjects)
+        .ThenInclude(up => up.UserProfile)
+        .Where(p => userProjects.Contains(p.Id))
+        .ToList();
+
+    return Ok(projectsForUser);
+    }
+
     [HttpGet("{id}")]
     // [Authorize]
     public IActionResult GetById(int id)

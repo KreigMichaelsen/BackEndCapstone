@@ -2,11 +2,9 @@ import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import { createProjectTask, editTask, getProjectTaskById } from "../../managers/projectTaskManager";
 import { getUsers } from "../../managers/userProfileManager";
 import { getProjects } from "../../managers/projectManager";
-import { getCategories } from "../../managers/categoryManager";
-import { editNote } from "../../managers/projectNoteManager";
+import { editNote, getProjectNoteById } from "../../managers/projectNoteManager";
 
 
 

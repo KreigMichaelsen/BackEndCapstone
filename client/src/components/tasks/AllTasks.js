@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import TaskList from "./TaskList.js";
+import AllTaskList from "./AllTaskList.js";
 
-export default function Tasks({loggedInUser}) {
+export default function AllTasks() {
 
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      <h2>My Tasks</h2>
+      <h2>All Tasks</h2>
        <Button
           color="dark"
           onClick={() => {
@@ -20,7 +20,7 @@ export default function Tasks({loggedInUser}) {
         </Button>
       <div className="row">
         <div className="col-sm-8">
-          <TaskList loggedInUser={loggedInUser}/>
+          <AllTaskList />
         </div>
       </div>
     </div>

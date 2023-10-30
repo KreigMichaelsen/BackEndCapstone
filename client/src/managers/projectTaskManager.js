@@ -13,6 +13,11 @@ export const getProjectTaskByProjectId = (id) => {
   
 };
 
+export const getProjectTasksByUserId = (id) => {
+  return fetch(`${apiUrl}/${id}/forUser`).then((res) => res.json());
+  
+};
+
 export const deleteTask = (id) => {
   return fetch(`${apiUrl}/${id}`, {
     method: "DELETE",
