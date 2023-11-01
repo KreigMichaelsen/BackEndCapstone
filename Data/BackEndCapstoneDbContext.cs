@@ -120,7 +120,8 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
                 Title = "Project #1",
                 CategoryId = 1,
                 DueDate = new DateTime(2023, 10, 20),
-                IsCompleted = false
+                IsCompleted = false,
+                Completion = 0
             },
             new Project
             {
@@ -128,7 +129,8 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
                 Title = "Project #2",
                 CategoryId = 2,
                 DueDate = new DateTime(2023, 10, 20),
-                IsCompleted = false
+                IsCompleted = false,
+                Completion = 0
             },
             new Project
             {
@@ -136,7 +138,8 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
                 Title = "Project #3",
                 CategoryId = 3,
                 DueDate = new DateTime(2023, 10, 20),
-                IsCompleted = false
+                IsCompleted = false,
+                Completion = 0
             },
             new Project
             {
@@ -144,7 +147,8 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
                 Title = "Project #4",
                 CategoryId = 4,
                 DueDate = new DateTime(2023, 10, 20),
-                IsCompleted = false
+                IsCompleted = false,
+                Completion = 0
             },
 
         });

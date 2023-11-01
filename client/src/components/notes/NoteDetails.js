@@ -20,39 +20,7 @@ export default function NoteDetails() {
     
   }, [id]);
 
-//   const onUpdateNote = (updatedNote) => {
-//     const updatedNotesArr = notes.map((note) => {
-//       if (note.id === updatedNote.id) {
-//         return updatedNote;
-//       }
-
-//       return note;
-//     });
-
-//     setNotes(updatedNotesArr);
-//   };
-
-//   const onEditField = (field, value) => {
-//     onUpdateNote({
-//       ...note,
-//       [field]: value,
-//     });
-//   };
-
-//   const handleFormSubmit = (event) => {
-//     event.preventDefault(); // Prevent default form submission behavior
-
-//     const noteToEdit = {
-//         id: note.id,
-//         title,
-//         body,
-        
-//     };
-
-//     editNote(noteToEdit)
-    
-
-// };
+  
 
 
 
@@ -65,6 +33,7 @@ export default function NoteDetails() {
           <CardText>{note?.body}</CardText>
         </CardBody>
       </Card>
+      
       {/* <div className="app-main-note-edit">
         <input
           type="text"
@@ -85,6 +54,26 @@ export default function NoteDetails() {
                     Save Changes
       </Button>
       */}
+
+{/* <div className="app-main">
+      <div className="app-main-note-edit">
+        <input
+          type="text"
+          id="title"
+          placeholder="Note Title"
+          value={activeNote.title}
+          onChange={(e) => onEditField("title", e.target.value)}
+          autoFocus
+        />
+        <textarea
+          id="body"
+          placeholder="Write your note here..."
+          value={activeNote.body}
+          onChange={(e) => onEditField("body", e.target.value)}
+        />
+      </div>
+     
+    </div> */}
     
     </>
   );

@@ -9,7 +9,7 @@ import { getCategories } from "../../managers/categoryManager";
 
 
 
-export const ProjectTaskAddForm = () => {
+export const ProjectTaskAddForm = ({toggleTaskModal, getAllTasksForProject, getTasksForProject}) => {
 
 
     const [project, setProject] = useState(null);
@@ -59,7 +59,12 @@ export const ProjectTaskAddForm = () => {
 
         createProjectTask(taskToPost)
         .then(() => {
-            navigate(`/projects/${project.id}`); // This ensures navigation happens after order creation
+            getTasksForProject(project.id)
+            getAllTasksForProject(project.id); // This ensures navigation happens after order creation
+        })
+        .then(() => {
+            
+            toggleTaskModal(); // This ensures navigation happens after order creation
         });
     
     };
@@ -109,7 +114,7 @@ export const ProjectTaskAddForm = () => {
                         </Input>
                 </FormGroup>
                 <FormGroup>
-                        <Label for="exampleDatetime">Datetime</Label>
+                        <Label for="exampleDatetime">Due Date</Label>
                         <Input type="date" 
                         name="date" 
                         id="exampleDatetime" 
@@ -129,7 +134,7 @@ export const ProjectTaskAddForm = () => {
                 <Button
                 color="danger"
                 onClick={() => {
-                    navigate(`/projects/${project.id}`)
+                    toggleTaskModal()
                 }}
                 >
                 Cancel

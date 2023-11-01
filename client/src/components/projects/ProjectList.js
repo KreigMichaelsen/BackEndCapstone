@@ -22,6 +22,7 @@ export default function ProjectList({loggedInUser}) {
           project={project}
           key={`project-${project.id}`}
           getAllProjects={getAllProjects}
+          loggedInUser={loggedInUser}
         >
         </ProjectCard>
       ))}

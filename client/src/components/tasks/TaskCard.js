@@ -6,7 +6,11 @@ import {
   CardText,
   CardSubtitle,
   Button,
+  CardHeader,
 } from "reactstrap";
+import "./task.css"
+
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import { completeTask, deleteTask } from "../../managers/projectTaskManager";
@@ -33,26 +37,28 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
     };
 
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
+    <Card className="taskCard"  color="dark" outline style={{ marginBottom: "4px" }}>
+      <CardHeader className="taskCardHeader">
+      {task.title}
+      </CardHeader>
       <CardBody>
-        <CardTitle tag="h5">{task.title}</CardTitle>
         <CardText>Completed? {task.isCompleted? "Yes" : "No"}</CardText>
         
         <Button
-          color="dark"
+          color="secondary"
           onClick={() => {
             navigate(`/tasks/${task.id}`);
           }}
         >
-          Show Details
+          <BsFillGearFill />
         </Button>
         <Button
-          color="dark"
+          color="secondary"
           onClick={() => {
             navigate(`/tasks/${task.id}/edit`);
           }}
         >
-          Edit
+         <BsPencilSquare />
         </Button>
         { task.isCompleted
             ? <><i className="fa-solid fa-check"></i> Done! </>
@@ -62,7 +68,7 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
              color="success"
              style={{ marginLeft: "8px" }} // Add left margin for spacing
            >
-             Complete Task
+             <BsFillCheckSquareFill />
            </Button>
         }
 
@@ -71,7 +77,7 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Task
+          <BsTrash3Fill />
         </Button>
       </CardBody>
     </Card>

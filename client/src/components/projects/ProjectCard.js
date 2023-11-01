@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   CardBody,
@@ -7,7 +7,11 @@ import {
   CardSubtitle,
   Button,
   Progress,
+  CardHeader,
+  Badge,
 } from "reactstrap";
+import "./project.css"
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 import { deleteProject } from "../../managers/projectManager";
 
 export default function ProjectCard({ project, getAllProjects }) {
@@ -22,15 +26,22 @@ export default function ProjectCard({ project, getAllProjects }) {
 
   const navigate = useNavigate();
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
-      <CardBody>
-        <CardTitle tag="h5">{project.title}</CardTitle>
-        <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Category: {project?.category?.title}
-        </CardSubtitle>
-      
-     
-
+    <Card className="projectCard" color="dark" outline style={{ marginBottom: "4px" }}>
+      <CardHeader className="projectCardHeader">
+      {project.title}
+      </CardHeader>
+      <CardBody  
+      // onClick={() => {navigate(`/projects/${project.id}`)}}
+          >
+        <CardText>
+            Category:  
+            <Badge className="projectCategoryPillBadge"
+            color="warning"
+            pill
+            >
+            {project?.category?.title}
+          </Badge>
+          </CardText>
         {/* <Progress
         value={36}
         /> */}
@@ -43,19 +54,21 @@ export default function ProjectCard({ project, getAllProjects }) {
           Show Details
         </Button>
         <Button
-          color="dark"
+          className="projectCardEditButton"
+          color="secondary"
           onClick={() => {
             navigate(`/projects/${project.id}/edit`);
           }}
         >
-          Edit
+        <BsPencilSquare />
         </Button>
         <Button
+          className="projectCardDeleteButton"
           onClick={() => deleteProjectFunction(project.id)}
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Project
+          <BsTrash3Fill />
         </Button>
       </CardBody>
     </Card>

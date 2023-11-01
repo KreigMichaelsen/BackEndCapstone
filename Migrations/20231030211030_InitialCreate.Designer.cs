@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEndCapstone.Migrations
 {
     [DbContext(typeof(BackEndCapstoneDbContext))]
-    [Migration("20231024161520_InitialCreate")]
+    [Migration("20231030211030_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,9 @@ namespace BackEndCapstone.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
+                    b.Property<decimal?>("Completion")
+                        .HasColumnType("numeric");
+
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -93,6 +96,7 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
+                            Completion = 0m,
                             DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             Title = "Project #1"
@@ -101,6 +105,7 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
+                            Completion = 0m,
                             DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             Title = "Project #2"
@@ -109,6 +114,7 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
+                            Completion = 0m,
                             DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             Title = "Project #3"
@@ -117,6 +123,7 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = 4,
                             CategoryId = 4,
+                            Completion = 0m,
                             DueDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCompleted = false,
                             Title = "Project #4"
@@ -134,18 +141,20 @@ namespace BackEndCapstone.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("text");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserProfileId")
+                    b.Property<int?>("UserProfileId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("ProjectNotes");
 
@@ -195,7 +204,7 @@ namespace BackEndCapstone.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DueDate")
+                    b.Property<DateTime?>("DueDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsCompleted")
@@ -386,14 +395,14 @@ namespace BackEndCapstone.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "9c6c245d-4e64-434f-92d2-e79e30fcb468",
+                            ConcurrencyStamp = "03cf9c13-07fb-4ffd-81f3-f6c25ebc6726",
                             Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "50a26418-8379-41c5-9cb4-937ee3be79f3",
-                            ConcurrencyStamp = "89e51e6d-09f8-4793-a47f-867790eba18d",
+                            ConcurrencyStamp = "a35e6d38-ef67-4fe3-ba61-8f3027672715",
                             Name = "User",
                             NormalizedName = "user"
                         });
@@ -492,13 +501,13 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "436224b3-892a-4714-a7f0-d30d4ebd0d1c",
+                            ConcurrencyStamp = "b83efd22-352f-4ce1-be22-fe7483240579",
                             Email = "kreig@michaelsen.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAENQUIFNdEfZz1aaqY+FpPgBV7aIy5l4XjLxGcq9D1cPoXvH0OyjfS0d0+7Ls18/2hA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBNJCAOzW6343f+9NBl5c6Psr5mvT0FAQLEleA67la2WwdrhEl4GWkY9b7ZLCGiKSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c5ca1cb0-95ce-4b20-a2ae-34d05e238a4e",
+                            SecurityStamp = "054a4f0a-0969-4742-b1fc-1880d95f415b",
                             TwoFactorEnabled = false,
                             UserName = "KreigMichaelsen"
                         },
@@ -506,13 +515,13 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c2ef1aa-09a5-46ea-869b-acb890c8400a",
+                            ConcurrencyStamp = "6b03588a-115b-439a-9946-a9a74266b64c",
                             Email = "normal@user.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGXaVQn3eAkuTsIv57tf6exBAYhdc6RXvyyv46BGAuNFIZLTXcZtEULfAGbSeT90wA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJuOqoTAtGEwz9MKOwaG5gi8tNZORn52ZAugh2+9twq2kKtpBUs/XDWO4w9b0oi+cw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ffcbf2d-6649-4311-a336-f4b62d83090f",
+                            SecurityStamp = "38dbf764-74fa-4f25-8921-ace47d45acd1",
                             TwoFactorEnabled = false,
                             UserName = "NormalUser"
                         });
@@ -622,11 +631,17 @@ namespace BackEndCapstone.Migrations
 
             modelBuilder.Entity("BackEndCapstone.Models.ProjectNote", b =>
                 {
-                    b.HasOne("BackEndCapstone.Models.Project", null)
+                    b.HasOne("BackEndCapstone.Models.Project", "Project")
                         .WithMany("ProjectNotes")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("BackEndCapstone.Models.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("BackEndCapstone.Models.ProjectTask", b =>
@@ -670,7 +685,7 @@ namespace BackEndCapstone.Migrations
                         .HasForeignKey("ProjectId");
 
                     b.HasOne("BackEndCapstone.Models.UserProfile", "UserProfile")
-                        .WithMany()
+                        .WithMany("UserProjects")
                         .HasForeignKey("UserProfileId");
 
                     b.Navigation("Project");
@@ -737,6 +752,11 @@ namespace BackEndCapstone.Migrations
 
                     b.Navigation("UserProfiles");
 
+                    b.Navigation("UserProjects");
+                });
+
+            modelBuilder.Entity("BackEndCapstone.Models.UserProfile", b =>
+                {
                     b.Navigation("UserProjects");
                 });
 #pragma warning restore 612, 618

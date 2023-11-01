@@ -9,7 +9,7 @@ export default function AllProjects() {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="allProjectsContainer">
       <div className="row">
       <h2>All Projects</h2>
       <div className="col-sm-8">

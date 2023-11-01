@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../managers/authManager";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import "./auth.css"
 
 export default function Login({ setLoggedInUser }) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function Login({ setLoggedInUser }) {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "500px" }}>
+    <div className="loginContainer" style={{ maxWidth: "500px" }}>
       <h3>Login</h3>
       <FormGroup>
         <Label>Email</Label>

@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.userPill {
+
+  float: right;
+  margin-right: 5%;
+
+  font-size: 15px;
+  font-weight: bold;
+  color:#2a2f36 ;
+  background-color: #ffc108 ;
+  border-radius: 100px;
+  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  
+
+}

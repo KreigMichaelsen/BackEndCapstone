@@ -6,7 +6,9 @@ import {
   CardText,
   CardSubtitle,
   Button,
+  CardHeader,
 } from "reactstrap";
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import { deleteNote } from "../../managers/projectNoteManager";
@@ -34,47 +36,30 @@ export default function NoteForProjectCard({  note, getAllNotes, getAllNotesForP
 //     };
 
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
+    <Card className="noteForProjectCard"color="dark" outline style={{ marginBottom: "4px" }}>
+      <CardHeader className="noteForProjectCardHeader" onClick={() => {
+      navigate(`/notes/${note.id}/edit`);
+    }}>
+      {note.title}
+      </CardHeader>
       <CardBody>
-        <CardTitle tag="h5">{note.title}</CardTitle>
-        <CardText>{note?.project?.title}</CardText>
-        <CardText>{note.body}</CardText>
-        <CardText>User: {note?.userProfile?.fullName}</CardText>
+        <CardText className="noteForProjectCardBody">{note.body}</CardText>
+        <CardText>Created By: {note?.userProfile?.firstName}</CardText>
         
-        <Button
-          color="dark"
-          onClick={() => {
-            navigate(`/notes/${note.id}`);
-          }}
-        >
-          Show Details
-        </Button>
         <Button
           color="dark"
           onClick={() => {
             navigate(`/notes/${note.id}/edit`);
           }}
         >
-          Edit
+        <BsPencilSquare />
         </Button>
-        {/* { task.isCompleted
-            ? <><i className="fa-solid fa-check"></i> Done! </>
-             :
-             <Button
-             onClick={() => completeTaskFunction(task.id)}
-             color="success"
-             style={{ marginLeft: "8px" }} // Add left margin for spacing
-           >
-             Complete Task
-           </Button>
-        } */}
-
         <Button
           onClick={() => deleteNoteFunction(note.id)}
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Note
+           <BsTrash3Fill />
         </Button>
       </CardBody>
     </Card>

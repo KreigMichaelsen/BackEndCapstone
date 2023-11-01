@@ -39,6 +39,7 @@ public class ProjectTaskController : ControllerBase
     public IActionResult GetTasksForProject(int projectId)
     {
         return Ok(_dbContext.ProjectTasks
+        .Include(pt => pt.Category)
         .Where(pt => pt.ProjectId == projectId)
         .ToList());
     }

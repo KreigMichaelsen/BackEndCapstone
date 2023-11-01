@@ -1,0 +1,64 @@
+.noteEditBodyInput {
+    height: 500px;
+}
+
+.noteEditFormContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.noteCreationFormContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+
+
+.noteForProjectCardListContainer {
+    display: flex;
+}
+
+.noteForProjectCard {
+    width: 300px;
+    margin-top: 1%;
+    margin-right: 1%;
+}
+
+.noteForProjectCard:hover {
+   
+    transform: translateY(0) scale(1.02);
+    box-shadow:  0px 0px 5px rgba(0, 0, 0, 0.74); 
+}
+
+.noteForProjectCardBody {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.noteForProjectCardHeader {
+    background-color: #2a2f36 ;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    
+}
+
+.myNotesContainer {
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.noteCard {
+    cursor: pointer;
+    margin-top: 1%;
+    width: 500px;
+}
+
+.noteCard:hover {
+   
+    transform: translateY(0) scale(1.02);
+    box-shadow:  0px 0px 5px rgba(0, 0, 0, 0.74); 
+}

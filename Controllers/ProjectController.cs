@@ -123,6 +123,61 @@ public class ProjectController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPut("{id}/complete")]
+    // [Authorize]
+    public IActionResult CompleteProject(int id)
+    {
+        Project projectToComplete = _dbContext.Projects.SingleOrDefault(wo => wo.Id == id);
+        if (projectToComplete == null)
+        {
+            return NotFound();
+        }
+
+        //These are the only properties that we want to make editable
+       projectToComplete.IsCompleted = true;
+       
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpPut("{id}/updateCompletion")]
+    // [Authorize]
+    public IActionResult UpdateProjectCompletion (int id, decimal progressNumber)
+    {
+        Project projectToUpdate = _dbContext.Projects.SingleOrDefault(wo => wo.Id == id);
+        if (projectToUpdate == null)
+        {
+            return NotFound();
+        }
+
+        //These are the only properties that we want to make editable
+       projectToUpdate.Completion = progressNumber;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpPut("{id}/incomplete")]
+    // [Authorize]
+    public IActionResult IncompleteProject(int id)
+    {
+        Project projectToNotComplete = _dbContext.Projects.SingleOrDefault(wo => wo.Id == id);
+        if (projectToNotComplete == null)
+        {
+            return NotFound();
+        }
+
+        //These are the only properties that we want to make editable
+       projectToNotComplete.IsCompleted = false;
+        
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
     // [HttpPut("{id}/complete")]
     // [Authorize]
     // public IActionResult CompleteWorkOrder(int id)

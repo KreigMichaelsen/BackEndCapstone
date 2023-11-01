@@ -11,7 +11,7 @@ public class Project
     public Category Category { get; set; }
     public DateTime DueDate { get; set; }
     public bool IsCompleted { get; set; }
-
+    public decimal? Completion { get; set; }
     public List<ProjectNote> ProjectNotes { get; set; }
     public List<ProjectTask> ProjectTasks { get; set; }
     public List<UserProject> UserProjects { get; set; }

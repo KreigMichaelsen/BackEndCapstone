@@ -9,7 +9,7 @@ import { getProjectById } from "../../managers/projectManager";
 
 
 
-export const ProjectNoteAddForm = ({loggedInUser}) => {
+export const ProjectNoteAddForm = ({loggedInUser, toggleNoteModal, getAllNotesForProject}) => {
     
     const [project, setProject] = useState(null);
     const [title, setTitle] = useState("")
@@ -35,8 +35,8 @@ export const ProjectNoteAddForm = ({loggedInUser}) => {
         event.preventDefault(); // Prevent default form submission behavior
 
         const noteToPost = {
-            userProfileId: loggedInUser.id,
-            projectId: project.id,
+            userProfileId: loggedInUser?.id,
+            projectId: project?.id,
             title,
             body,
             
@@ -44,7 +44,10 @@ export const ProjectNoteAddForm = ({loggedInUser}) => {
 
         createProjectNote(noteToPost)
         .then(() => {
-            navigate(`/projects/${project.id}`); // This ensures navigation happens after order creation
+            getAllNotesForProject(project.id); // This ensures navigation happens after order creation
+        })
+        .then(() => {
+            toggleNoteModal(); // This ensures navigation happens after order creation
         });
     
     };
@@ -82,7 +85,7 @@ export const ProjectNoteAddForm = ({loggedInUser}) => {
                     <Button
                 color="danger"
                 onClick={() => {
-                    navigate(`/projects/${project.id}`)
+                    toggleNoteModal()
                 }}
                 >
                 Cancel

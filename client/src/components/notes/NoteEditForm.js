@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
-
+import "./note.css"
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { getUsers } from "../../managers/userProfileManager";
 import { getProjects } from "../../managers/projectManager";
@@ -55,7 +55,6 @@ export const NoteEditForm = () => {
 
         const noteToEdit = {
             id: note.id,
-            userProfileId,
             projectId,
             title,
             body,
@@ -70,9 +69,10 @@ export const NoteEditForm = () => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-        <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Edit Note</h2>
+        <div className="noteEditFormContainer">
+        <div className="noteEditForm">
+            <h2 className="noteEditFormTitle">{note?.title}</h2>
+            <p>Created by: {note?.userProfile?.firstName}</p>
             <Form>
             <FormGroup>
                     <Label for="titleInput">Title</Label>
@@ -85,8 +85,10 @@ export const NoteEditForm = () => {
                     </Input>
                 </FormGroup>
                 <FormGroup>
-                        <Label for="bodyInput">Note Body</Label>
-                        <Input type="textarea"
+                        <Label className="noteEditBodyLabel">Note Body</Label>
+                        <Input 
+                        className="noteEditBodyInput"
+                        type="textarea"
                             name="body"
                             value={body}
                             onChange={(e) => {
@@ -95,7 +97,7 @@ export const NoteEditForm = () => {
                         >
                         </Input>
                     </FormGroup>
-                <FormGroup>
+                {/* <FormGroup>
                     <Label for="userSelect">User</Label>
                     <Input 
                     type="select" 
@@ -109,7 +111,7 @@ export const NoteEditForm = () => {
                     <option value={userProfile.id} key={userProfile.id}>{userProfile.fullName}</option>
                     ))}
                     </Input>
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup>
                         <Label for="projectSelect">Project</Label>
                         <Input type="select" 

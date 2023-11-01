@@ -23,6 +23,36 @@ export const editProject = (project) => {
   });
 };
 
+export const updateProjectCompletion = (id, progressNumber) => {
+  return fetch(`${apiUrl}/${id}/updateCompletion`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(progressNumber),
+  });
+};
+
+export const completeProject = (id) => {
+  return fetch(`${apiUrl}/${id}/complete`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  });
+};
+
+export const unCompleteProject = (id) => {
+  return fetch(`${apiUrl}/${id}/incomplete`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  });
+};
+
 export const createProject = (project) => {
   return fetch(apiUrl, {
     method: "POST",

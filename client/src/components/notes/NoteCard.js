@@ -5,8 +5,10 @@ import {
   CardTitle,
   CardText,
   CardSubtitle,
-  Button,
+  Button
 } from "reactstrap";
+
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import { deleteNote } from "../../managers/projectNoteManager";
@@ -34,7 +36,7 @@ export default function NoteCard({  note, getAllNotes }) {
 //     };
 
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
+    <Card className="noteCard" color="dark" outline style={{ marginBottom: "4px" }}>
       <CardBody>
         <CardTitle tag="h5">{note.title}</CardTitle>
         <CardText>{note?.project?.title}</CardText>
@@ -55,7 +57,7 @@ export default function NoteCard({  note, getAllNotes }) {
             navigate(`/notes/${note.id}/edit`);
           }}
         >
-          Edit
+          <BsPencilSquare />
         </Button>
         {/* { task.isCompleted
             ? <><i className="fa-solid fa-check"></i> Done! </>
@@ -74,7 +76,7 @@ export default function NoteCard({  note, getAllNotes }) {
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Note
+          <BsTrash3Fill />
         </Button>
       </CardBody>
     </Card>
