@@ -1,0 +1,76 @@
+.projectCard {
+    cursor: pointer;
+    margin-top: 1%;
+    width: 500px;
+}
+
+.projectCardHeader {
+    background-color: #2a2f36 ;
+    color: white;
+    font-size: 20px;
+}
+
+.projectCard:hover {
+   
+    transform: translateY(0) scale(1.02);
+    box-shadow:  0px 0px 5px rgba(0, 0, 0, 0.74); 
+}
+
+.addNoteForProjectIcon {
+    font-size: 20px;
+}
+
+.addTaskForProjectIcon {
+    font-size: 20px;
+}
+
+.addTaskForProjectButton {
+    float: left;
+}
+
+.filterTaskDropdownForProjectToggle {
+   font-weight: bold;
+}
+
+.addUserForProjectIcon {
+    font-size: 20px;
+}
+
+.addUserForProjectButton {
+    margin-bottom: 1%;
+}
+
+.myProjectsContainer {
+    margin-left: 20%;
+    margin-top: 2%;
+    
+}
+
+.allProjectsContainer {
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.projectDetailsContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.projectCreationFormContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.projectProgressBar {
+    color: #fdc98b;
+}
+
+.projectDetailsCard {
+    background-color: #2a2f36;
+}
+
+.projectCategoryPillBadge {
+    background-color: #2a2f36;
+}

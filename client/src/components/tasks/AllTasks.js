@@ -8,7 +8,7 @@ export default function AllTasks() {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="allTasksContainer">
       <h2>All Tasks</h2>
        <Button
           color="dark"

@@ -80,9 +80,9 @@ export const ProjectCreationForm = () => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-        <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Create A New Project</h2>
+        <div className="projectCreationFormContainer">
+        <div className="projectCreationForm">
+            <h2 className="projectCreationFormTitle">Create A New Project</h2>
             <Form>
                 <FormGroup>
                     <Label for="titleInput">Title</Label>

@@ -45,9 +45,9 @@ export const NoteCreationForm = ({loggedInUser}) => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-            <div className="orderCreationForm">
-                <h2 className="orderFormTitle">Create A New Note</h2>
+        <div className="noteCreationFormContainer">
+            <div className="noteCreationForm">
+                <h2 className="noteFormTitle">Create A New Note</h2>
                 <Form>
                     <FormGroup>
                         <Label for="titleInput">Title</Label>

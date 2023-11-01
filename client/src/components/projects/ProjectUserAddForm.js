@@ -10,7 +10,7 @@ import { getUsersNotAssociatedWithProject } from "../../managers/userProfileMana
 
 
 
-export const ProjectUserAddForm = () => {
+export const ProjectUserAddForm = ({toggleModal, getAllUsersForProject}) => {
 
     const [project, setProject] = useState(null);
     const [unassignedUserProfiles, setUnassignedUserProfiles] = useState([])
@@ -53,7 +53,12 @@ export const ProjectUserAddForm = () => {
 
         createUserProject(userProjectToPost)
         .then(() => {
-            navigate(`/projects/${project.id}`); // This ensures navigation happens after order creation
+            getAllUsersForProject(project.id);
+            // This ensures navigation happens after order creation
+        })
+        .then(() => {
+            
+            toggleModal(); // This ensures navigation happens after order creation
         });
     
     };
@@ -85,9 +90,7 @@ export const ProjectUserAddForm = () => {
                 </Button>
                 <Button
                 color="danger"
-                onClick={() => {
-                    navigate(`/projects/${project.id}`)
-                }}
+                onClick={toggleModal}
                 >
                 Cancel
                 </Button>

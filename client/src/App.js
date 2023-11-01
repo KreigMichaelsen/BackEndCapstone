@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { tryGetLoggedInUser } from "./managers/authManager";
-import { Spinner } from "reactstrap";
+import { Badge, Spinner } from "reactstrap";
 import NavBar from "./components/NavBar";
 import ApplicationViews from "./components/ApplicationViews";
+import { BsPersonCircle } from "react-icons/bs";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -23,6 +24,9 @@ function App() {
 
   return (
     <>
+      <div className="userPill">
+      {loggedInUser?.fullName}  <BsPersonCircle/>
+      </div>
       <NavBar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
       <ApplicationViews
         loggedInUser={loggedInUser}

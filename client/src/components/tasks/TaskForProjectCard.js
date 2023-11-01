@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardBody,
@@ -6,13 +6,29 @@ import {
   CardText,
   CardSubtitle,
   Button,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Tooltip,
+  Badge,
+  CardHeader,
 } from "reactstrap";
+import "./task.css"
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill} from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import { completeTask, deleteTask } from "../../managers/projectTaskManager";
 
 export default function TaskForProjectCard({ task, getAllTasks, project, getProjectDetails, getAllTasksForProject, getTasksForProject }) {
   const navigate = useNavigate();
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const toggleToolTip = () => setTooltipOpen(!tooltipOpen);
 
   //^ Function to delete an order
   const deleteTaskFunction = (taskId) => {
@@ -37,12 +53,54 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
     };
 
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
+    <Card className="taskForProjectCard" color="dark" outline style={{ marginBottom: "4px" }}>
+      <CardHeader className="taskForProjectCardHeader">{task.title}</CardHeader>
       <CardBody>
-        <CardTitle tag="h5">{task.title}</CardTitle>
-        <CardText>Completed? {task.isCompleted? "Yes" : "No"}</CardText>
-        
-        <Button
+        <CardText>
+            Category:  
+            <Badge className="projectCategoryPillBadge"
+            color="warning"
+            pill
+            >
+            {task?.category?.title}
+          </Badge>
+          </CardText>
+        { task.isCompleted
+            ? <><i className="fa-solid fa-check"></i> Done! </>
+             :
+             <div>
+             <Button
+             id="completeTaskCardForProjectButton"
+             className="completeTaskCardForProjectButton"
+             onClick={() => completeTaskFunction(task.id)}
+            //  style={{ backgroundColor: "pink" }}
+              // Add left margin for spacing
+           >
+            <BsFillCheckSquareFill />
+           </Button>
+           <Tooltip
+           isOpen={tooltipOpen}
+           target="completeTaskCardForProjectButton"
+           toggle={toggleToolTip}
+         >
+           Complete Task
+         </Tooltip>
+         </div>
+        }
+        <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+        <DropdownToggle caret color="secondary">
+        <BsFillGearFill />
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem onClick={() => {
+            navigate(`/tasks/${task.id}`);
+          }}>Show Details</DropdownItem>
+          <DropdownItem onClick={() => {
+            navigate(`/tasks/${task.id}/edit`);
+          }}>Edit</DropdownItem>
+        </DropdownMenu>
+      </ButtonDropdown>
+        {/* <Button
           color="dark"
           onClick={() => {
             navigate(`/tasks/${task.id}`);
@@ -57,27 +115,25 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
           }}
         >
           Edit
-        </Button>
-        { task.isCompleted
-            ? <><i className="fa-solid fa-check"></i> Done! </>
-             :
-             <Button
-             onClick={() => completeTaskFunction(task.id)}
-             color="success"
-             style={{ marginLeft: "8px" }} // Add left margin for spacing
-           >
-             Complete Task
-           </Button>
-        }
+        </Button> */}
         
 
         <Button
+          id="deleteTaskCardForProjectButton"
+          className="deleteTaskCardForProjectButton"
           onClick={() => deleteTaskFunction(task.id)}
           color="danger"
           style={{ marginLeft: "8px" }} // Add left margin for spacing
         >
-          Delete Task
+          <BsTrash3Fill />
         </Button>
+        <Tooltip
+           isOpen={tooltipOpen}
+           target="deleteTaskCardForProjectButton"
+           toggle={toggleToolTip}
+         >
+           Delete Task
+         </Tooltip>
       </CardBody>
     </Card>
   );

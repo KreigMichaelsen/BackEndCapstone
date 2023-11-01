@@ -53,9 +53,9 @@ export const TaskCreationForm = () => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-        <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Create A New Task</h2>
+        <div className="taskCreationFormContainer">
+        <div className="taskCreationForm">
+            <h2 className="taskCreationFormTitle">Create A New Task</h2>
             <Form>
             <FormGroup>
                     <Label for="titleInput">Title</Label>
@@ -111,7 +111,7 @@ export const TaskCreationForm = () => {
                         </Input>
                 </FormGroup>
                 <FormGroup>
-                        <Label for="exampleDatetime">Datetime</Label>
+                        <Label for="exampleDatetime">Due Date</Label>
                         <Input type="date" 
                         name="date" 
                         id="exampleDatetime" 
