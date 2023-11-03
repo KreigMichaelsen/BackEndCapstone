@@ -83,6 +83,7 @@ export default function ProjectDetails({loggedInUser}) {
     });
   };
 
+ 
 
 
   useEffect(() => {
@@ -157,7 +158,7 @@ useEffect(() => {
       <h1>{project?.title}</h1>
       <Card  className="projectDetailsCard" inverse>
         <CardBody>
-          <CardTitle tag="h4">Details</CardTitle>
+          {/* <CardTitle tag="h4">Details</CardTitle> */}
           <Progress className="projectProgressBar" color="warning" value={progress} />
           <CardText>Completion: {progress}%</CardText>
           <CardText>
@@ -199,7 +200,7 @@ useEffect(() => {
       </Modal>
     </div>
 
-          <div>
+          <div className="userProjectCardForProjectListContainer">
             {userProjectsForProject.map((userProject) => (
               <UserProjectForProjectCard
                 userProject={userProject}
@@ -241,11 +242,11 @@ useEffect(() => {
         </ModalBody>
       </Modal>
     </div>
-      
+    
       
       <ButtonDropdown className="filterTaskDropdownButton" isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle className="filterTaskDropdownForProjectToggle" caret color="dark">
-          Filter Completed
+          Filter Completion
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem onClick={() => setShowCompleted(false)}>Show Incomplete</DropdownItem>

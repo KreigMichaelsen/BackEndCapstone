@@ -21,21 +21,12 @@ export const ProjectEditForm = () => {
 
     const navigate = useNavigate()
 
-    // const getProjectDetails = (id) => {
-    //     getProjectById(id).then(setProject) 
-    //   };
 
     const getAllCategories = () => {
         getCategories().then(setAllCategories); // Replace getOrders with your actual method to fetch orders
     };
     
-    //   useEffect(() => {
-        
-    //     getAllCategories();
-    //   }, []);
-
       useEffect(() => {
-        // getProjectDetails(id);
         getAllCategories();
 
         getProjectById(id).then((project) => {
@@ -67,9 +58,9 @@ export const ProjectEditForm = () => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-        <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Edit Project</h2>
+        <div className="projectEditFormContainer">
+        <div className="projectEditForm">
+            <h2 className="projectEditFormTitle">Edit Project</h2>
             <Form>
                 <FormGroup>
                     <Label for="titleInput">Title</Label>

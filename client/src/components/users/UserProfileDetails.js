@@ -31,6 +31,7 @@ export default function UserProfileDetails() {
 
   return (
     <>
+    <div className="userProfileDetailsContainer">
       <h1>{user?.fullName}</h1>
       <Card color="dark" inverse>
         <CardBody>
@@ -56,6 +57,7 @@ export default function UserProfileDetails() {
             
         </CardBody>
       </Card>
+      </div>
       {/* <h4>Tasks</h4>
       {project?.projectTasks?.map((task) => (
         <TaskCard

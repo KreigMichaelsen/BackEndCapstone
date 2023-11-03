@@ -44,11 +44,6 @@ export const NoteEditForm = () => {
 
     }, [id]);
 
-    // useEffect(() => {
-    //     getNoteDetails(id);
-      
-    // }, [id]);
-
 
     const handleFormSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -56,6 +51,7 @@ export const NoteEditForm = () => {
         const noteToEdit = {
             id: note.id,
             projectId,
+            userProfileId: note?.userProfileId,
             title,
             body,
             

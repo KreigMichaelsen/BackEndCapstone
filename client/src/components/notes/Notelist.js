@@ -41,6 +41,7 @@ export default function NoteList() {
 
   return (
     <>  
+    <div className="noteCardListContainer">
       {/* <Button onClick={ () => { setCompleted(false) } }> Incomplete</Button>
       <Button onClick={ () => { setCompleted(true) } }> Complete</Button>  */}
       {notes.map((note) => (
@@ -50,6 +51,7 @@ export default function NoteList() {
           getAllNotes={getAllNotes}
         ></NoteCard>
       ))}
+      </div>
     </>
   );
 }

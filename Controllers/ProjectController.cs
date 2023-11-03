@@ -86,7 +86,7 @@ public class ProjectController : ControllerBase
         {
              _dbContext.UserProjects.Add (new UserProject
             {
-                
+                Id = _dbContext.UserProjects.Count() > 0 ? _dbContext.UserProjects.Max(p => p.Id) + 1 : 1,
                 ProjectId = newProject.Id,
                 UserProfileId = userProfile.Id
 
@@ -210,10 +210,26 @@ public class ProjectController : ControllerBase
             return NotFound();
         }
 
-        _dbContext.UserProjects.RemoveRange(projectToDelete.UserProjects);
-        _dbContext.ProjectTasks.RemoveRange(projectToDelete.ProjectTasks);
-        _dbContext.Projects.Remove(projectToDelete);
-        _dbContext.SaveChanges();
+        if (projectToDelete.UserProjects != null)
+{
+    _dbContext.UserProjects.RemoveRange(projectToDelete.UserProjects);
+}
+
+if (projectToDelete.ProjectTasks != null)
+{
+    _dbContext.ProjectTasks.RemoveRange(projectToDelete.ProjectTasks);
+}
+
+if (projectToDelete.ProjectNotes != null)
+{
+    _dbContext.ProjectNotes.RemoveRange(projectToDelete.ProjectNotes);
+}
+
+if (projectToDelete != null)
+{
+    _dbContext.Projects.Remove(projectToDelete);
+    _dbContext.SaveChanges();
+}
 
         return NoContent();
     }

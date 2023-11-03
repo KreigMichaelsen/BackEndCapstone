@@ -15,7 +15,7 @@ import {
   CardHeader,
 } from "reactstrap";
 import "./task.css"
-import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill} from "react-icons/bs";
+import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare } from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import { completeTask, deleteTask } from "../../managers/projectTaskManager";
@@ -24,11 +24,18 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
   const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  // const [completionTooltipOpen, setCompletionTooltipOpen] = useState(false);
+  // const [detailsTooltipOpen, setDetailsTooltipOpen] = useState(false);
+  // const [editTooltipOpen, setEditTooltipOpen] = useState(false);
+  // const [deleteTooltipOpen, setDeleteTooltipOpen] = useState(false);
   
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  const toggleToolTip = () => setTooltipOpen(!tooltipOpen);
+  // const toggleCompletionToolTip = () => setCompletionTooltipOpen(!completionTooltipOpen);
+  // const toggleDetailsToolTip = () => setDetailsTooltipOpen(!detailsTooltipOpen);
+  // const toggleEditToolTip = () => setEditTooltipOpen(!editTooltipOpen);
+  // const toggleDeleteToolTip = () => setDeleteTooltipOpen(!deleteTooltipOpen);
+
 
   //^ Function to delete an order
   const deleteTaskFunction = (taskId) => {
@@ -73,49 +80,36 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
              id="completeTaskCardForProjectButton"
              className="completeTaskCardForProjectButton"
              onClick={() => completeTaskFunction(task.id)}
-            //  style={{ backgroundColor: "pink" }}
+             color="warning"
               // Add left margin for spacing
            >
             <BsFillCheckSquareFill />
            </Button>
-           <Tooltip
-           isOpen={tooltipOpen}
+           {/* <Tooltip
+           isOpen={completionTooltipOpen}
            target="completeTaskCardForProjectButton"
-           toggle={toggleToolTip}
+           toggle={toggleCompletionToolTip}
          >
            Complete Task
-         </Tooltip>
+         </Tooltip> */}
          </div>
         }
-        <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle caret color="secondary">
-        <BsFillGearFill />
-        </DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem onClick={() => {
-            navigate(`/tasks/${task.id}`);
-          }}>Show Details</DropdownItem>
-          <DropdownItem onClick={() => {
-            navigate(`/tasks/${task.id}/edit`);
-          }}>Edit</DropdownItem>
-        </DropdownMenu>
-      </ButtonDropdown>
-        {/* <Button
-          color="dark"
+       <Button className="taskCardDetailsButton"
+          // color="secondary"
           onClick={() => {
             navigate(`/tasks/${task.id}`);
           }}
         >
-          Show Details
+          <BsFillGearFill />
         </Button>
-        <Button
-          color="dark"
+        <Button className="taskCardEditButton"
+          // color="secondary"
           onClick={() => {
             navigate(`/tasks/${task.id}/edit`);
           }}
         >
-          Edit
-        </Button> */}
+         <BsPencilSquare />
+        </Button>
         
 
         <Button
@@ -127,13 +121,13 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
         >
           <BsTrash3Fill />
         </Button>
-        <Tooltip
-           isOpen={tooltipOpen}
+        {/* <Tooltip
+           isOpen={deleteTooltipOpen}
            target="deleteTaskCardForProjectButton"
-           toggle={toggleToolTip}
+           toggle={toggleDeleteToolTip}
          >
            Delete Task
-         </Tooltip>
+         </Tooltip> */}
       </CardBody>
     </Card>
   );

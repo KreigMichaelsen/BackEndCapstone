@@ -27,7 +27,9 @@ export default function ProjectCard({ project, getAllProjects }) {
   const navigate = useNavigate();
   return (
     <Card className="projectCard" color="dark" outline style={{ marginBottom: "4px" }}>
-      <CardHeader className="projectCardHeader">
+      <CardHeader className="projectCardHeader" onClick={() => {
+      navigate(`/projects/${project.id}`);
+    }}>
       {project.title}
       </CardHeader>
       <CardBody  
@@ -46,7 +48,8 @@ export default function ProjectCard({ project, getAllProjects }) {
         value={36}
         /> */}
         <Button
-          color="dark"
+          className="projectCardDetailsButton"
+          // color="dark"
           onClick={() => {
             navigate(`/projects/${project.id}`);
           }}
@@ -55,7 +58,7 @@ export default function ProjectCard({ project, getAllProjects }) {
         </Button>
         <Button
           className="projectCardEditButton"
-          color="secondary"
+          // color="secondary"
           onClick={() => {
             navigate(`/projects/${project.id}/edit`);
           }}

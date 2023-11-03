@@ -304,8 +304,8 @@ namespace BackEndCapstone.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "a35e6d38-ef67-4fe3-ba61-8f3027672715", "User", "user" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "03cf9c13-07fb-4ffd-81f3-f6c25ebc6726", "Admin", "admin" }
+                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "3b139d0b-f050-4f44-bad7-a5f28892ed96", "User", "user" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "b492488e-28b4-42e9-afe1-a9c98e9a373f", "Admin", "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -313,8 +313,9 @@ namespace BackEndCapstone.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "b756857a-13c6-434e-a3ca-dc65ad4315a0", 0, "6b03588a-115b-439a-9946-a9a74266b64c", "normal@user.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJuOqoTAtGEwz9MKOwaG5gi8tNZORn52ZAugh2+9twq2kKtpBUs/XDWO4w9b0oi+cw==", null, false, "38dbf764-74fa-4f25-8921-ace47d45acd1", false, "NormalUser" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "b83efd22-352f-4ce1-be22-fe7483240579", "kreig@michaelsen.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEBNJCAOzW6343f+9NBl5c6Psr5mvT0FAQLEleA67la2WwdrhEl4GWkY9b7ZLCGiKSg==", null, false, "054a4f0a-0969-4742-b1fc-1880d95f415b", false, "KreigMichaelsen" }
+                    { "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b", 0, "26bae9e5-4e31-4f47-a69e-2a08895d4256", "Jane@Doe.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEE1hGVhmtVgNQT6O1UzyetRQybzkDIQi0womsIcFQk09jMqPDNbyXmkVfOrfZhhbSQ==", null, false, "c7f20af0-2013-4c2f-a02d-865279a2349c", false, "JaneDoe" },
+                    { "b756857a-13c6-434e-a3ca-dc65ad4315a0", 0, "88713b18-d0a5-45d9-8a99-257b78f51906", "john@smith.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEI5+JlooA6YBJg7cjltBYhiHKXTxxGHzRDDq4ZXXHHTZ42BKe8sjdqYns5xBWlU1hg==", null, false, "d6eb9c54-6e31-4eb9-9dac-bdb5bce9e602", false, "JohnSmith" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "e6742134-8adb-4607-b4e4-a22314941ecc", "kreig@michaelsen.com", false, false, null, null, null, "AQAAAAEAACcQAAAAEJcZOEngXT5icdH/LC3BIrvS/V+N90L/vz/vgXrWBVjX0nCUqt/QzjUH4HFrPmkeFg==", null, false, "0c81d7a0-b6b1-4ad4-bee3-3db158cdbaa3", false, "KreigMichaelsen" }
                 });
 
             migrationBuilder.InsertData(
@@ -333,6 +334,7 @@ namespace BackEndCapstone.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
+                    { "50a26418-8379-41c5-9cb4-937ee3be79f3", "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b" },
                     { "50a26418-8379-41c5-9cb4-937ee3be79f3", "b756857a-13c6-434e-a3ca-dc65ad4315a0" },
                     { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
                 });
@@ -354,7 +356,8 @@ namespace BackEndCapstone.Migrations
                 values: new object[,]
                 {
                     { 1, "Kreig", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Michaelsen", null },
-                    { 2, "Normal", "b756857a-13c6-434e-a3ca-dc65ad4315a0", "User", null }
+                    { 2, "John", "b756857a-13c6-434e-a3ca-dc65ad4315a0", "Smith", null },
+                    { 3, "Jane", "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b", "Doe", null }
                 });
 
             migrationBuilder.InsertData(

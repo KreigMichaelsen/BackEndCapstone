@@ -16,7 +16,7 @@ export default function ProjectList({loggedInUser}) {
 
   return (
     <>
-      
+      <div className="projectCardListContainer">
       {projects.map((project) => (
         <ProjectCard
           project={project}
@@ -26,6 +26,7 @@ export default function ProjectList({loggedInUser}) {
         >
         </ProjectCard>
       ))}
+      </div>
     </>
   );
 }
