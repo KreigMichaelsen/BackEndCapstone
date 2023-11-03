@@ -36,12 +36,21 @@ export const TaskEditForm = () => {
         getProjects().then(setAllProjects);
         getCategories().then(setAllCategories);
 
-    }, []);
+        getProjectTaskById(id).then((task) => {
+            setTask(task);
+            setUserProfileId(task.userProfileId);
+            setProjectId(task.projectId);
+            setCategoryId(task.categoryId);
+            setTitle(task.title);
+            setDueDate(task.dueDate);
+        });
 
-    useEffect(() => {
-        getTaskDetails(id);
-      
     }, [id]);
+
+    // useEffect(() => {
+    //     getTaskDetails(id);
+      
+    // }, [id]);
 
 
     const handleFormSubmit = (event) => {
@@ -65,9 +74,9 @@ export const TaskEditForm = () => {
     };
 
     return <>
-        <div className="orderCreationFormContainer">
-        <div className="orderCreationForm">
-            <h2 className="orderFormTitle">Edit Task</h2>
+        <div className="taskEditFormContainer">
+        <div className="taskEditForm">
+            <h2 className="taskEditFormTitle">Edit Task</h2>
             <Form>
             <FormGroup>
                     <Label for="titleInput">Title</Label>
@@ -123,7 +132,7 @@ export const TaskEditForm = () => {
                         </Input>
                 </FormGroup>
                 <FormGroup>
-                        <Label for="exampleDatetime">Datetime</Label>
+                        <Label for="exampleDatetime">Due Date</Label>
                         <Input type="date" 
                         name="date" 
                         id="exampleDatetime" 

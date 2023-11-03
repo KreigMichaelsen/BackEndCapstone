@@ -7,6 +7,7 @@ import {
   CardSubtitle,
   Button,
   CardHeader,
+  Badge,
 } from "reactstrap";
 import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 
@@ -44,7 +45,15 @@ export default function NoteForProjectCard({  note, getAllNotes, getAllNotesForP
       </CardHeader>
       <CardBody>
         <CardText className="noteForProjectCardBody">{note.body}</CardText>
-        <CardText>Created By: {note?.userProfile?.firstName}</CardText>
+        <CardText>
+        Created By:  
+            <Badge className="projectCategoryPillBadge"
+            color="warning"
+            pill
+            >
+          {note?.userProfile?.firstName}
+          </Badge>
+          </CardText>
         
         <Button
           color="dark"

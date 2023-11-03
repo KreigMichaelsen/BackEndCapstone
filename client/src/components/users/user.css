@@ -6,3 +6,21 @@
 .userProfileCard {
     width: 500px;
 }
+
+.userProfileCard:hover {
+    transform: translateY(0) scale(1.02);
+    box-shadow:  0px 0px 5px rgba(0, 0, 0, 0.74); 
+}
+
+.userProfileDetailsContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.userProfileCardHeader {
+    background-color: #2a2f36 ;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}

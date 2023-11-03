@@ -22,6 +22,7 @@ export default function TaskDetails() {
 
   return (
     <>
+    <div className="taskDetailsContainer">
       <h2>Task Details</h2>
       <Card color="dark" inverse>
         <CardBody>
@@ -32,6 +33,7 @@ export default function TaskDetails() {
           <CardText>Completed? {task?.isCompleted? "Yes" : "No"}</CardText>
         </CardBody>
       </Card>
+    </div>
      
     
     </>

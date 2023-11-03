@@ -7,6 +7,7 @@ import {
   CardSubtitle,
   Button,
   Progress,
+  CardHeader,
 } from "reactstrap";
 
 import { deleteUserProject, getUserProjectsByProjectId } from "../../managers/userProjectManager";
@@ -23,12 +24,16 @@ export default function UserProjectForProjectCard({ userProject, getAllUserProje
 
   const navigate = useNavigate();
   return (
-    <Card color="dark" outline style={{ marginBottom: "4px" }}>
+    <Card className="userProjectForProjectCard" color="dark" outline style={{ marginBottom: "4px" }}>
+       <CardHeader className="userProjectForProjectCardHeader" onClick={() => {
+      navigate(`/users/${userProject?.userProfileId}`);
+      }}>
+      {userProject?.userProfile?.fullName}
+      </CardHeader>
       <CardBody>
-        <CardTitle tag="h5">{userProject?.userProfile?.fullName}</CardTitle>
-        <CardSubtitle className="mb-2 text-muted" tag="h6">
+        {/* <CardSubtitle className="mb-2 text-muted" tag="h6">
          Id: {userProject?.id}
-        </CardSubtitle>
+        </CardSubtitle> */}
 
         <Button
           onClick={() => deleteProjectFunction(userProject.id)}

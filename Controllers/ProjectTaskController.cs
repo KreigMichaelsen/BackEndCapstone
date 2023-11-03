@@ -29,6 +29,8 @@ public class ProjectTaskController : ControllerBase
     public IActionResult GetTasksForUser(int userid)
     {
         var tasksForUser = _dbContext.ProjectTasks
+        .Include(pt => pt.Category)
+        .Include(pt => pt.Project)
         .Where(pt => pt.UserProfileId == userid)
         .ToList();
         return Ok(tasksForUser);

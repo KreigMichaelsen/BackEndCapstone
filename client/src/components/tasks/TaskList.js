@@ -64,6 +64,7 @@ export default function TaskList({loggedInUser}) {
 
   return (
     <>  
+    
       {/* <Button onClick={() => setShowCompleted(false)}>Show Incomplete</Button>
       <Button onClick={() => setShowCompleted(true)}>Show Completed</Button>
       <Button onClick={() => setShowCompleted(null)}>Show All Tasks</Button> */}
@@ -86,6 +87,7 @@ export default function TaskList({loggedInUser}) {
           <DropdownItem onClick={() => setShowCompleted(null)}>Show All Tasks</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
+      <div className="taskCardListContainer">
       {filteredTasks.map((task) => (
         <TaskCard
           task={task}
@@ -93,6 +95,7 @@ export default function TaskList({loggedInUser}) {
           getAllTasks={getAllTasks}
         ></TaskCard>
       ))}
+      </div>
     </>
   );
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEndCapstone.Migrations
 {
     [DbContext(typeof(BackEndCapstoneDbContext))]
-    [Migration("20231030211030_InitialCreate")]
+    [Migration("20231102211852_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -311,9 +311,16 @@ namespace BackEndCapstone.Migrations
                         new
                         {
                             Id = 2,
-                            FirstName = "Normal",
+                            FirstName = "John",
                             IdentityUserId = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
-                            LastName = "User"
+                            LastName = "Smith"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Jane",
+                            IdentityUserId = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b",
+                            LastName = "Doe"
                         });
                 });
 
@@ -395,14 +402,14 @@ namespace BackEndCapstone.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "03cf9c13-07fb-4ffd-81f3-f6c25ebc6726",
+                            ConcurrencyStamp = "b492488e-28b4-42e9-afe1-a9c98e9a373f",
                             Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = "50a26418-8379-41c5-9cb4-937ee3be79f3",
-                            ConcurrencyStamp = "a35e6d38-ef67-4fe3-ba61-8f3027672715",
+                            ConcurrencyStamp = "3b139d0b-f050-4f44-bad7-a5f28892ed96",
                             Name = "User",
                             NormalizedName = "user"
                         });
@@ -501,13 +508,13 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b83efd22-352f-4ce1-be22-fe7483240579",
+                            ConcurrencyStamp = "e6742134-8adb-4607-b4e4-a22314941ecc",
                             Email = "kreig@michaelsen.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBNJCAOzW6343f+9NBl5c6Psr5mvT0FAQLEleA67la2WwdrhEl4GWkY9b7ZLCGiKSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJcZOEngXT5icdH/LC3BIrvS/V+N90L/vz/vgXrWBVjX0nCUqt/QzjUH4HFrPmkeFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "054a4f0a-0969-4742-b1fc-1880d95f415b",
+                            SecurityStamp = "0c81d7a0-b6b1-4ad4-bee3-3db158cdbaa3",
                             TwoFactorEnabled = false,
                             UserName = "KreigMichaelsen"
                         },
@@ -515,15 +522,29 @@ namespace BackEndCapstone.Migrations
                         {
                             Id = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b03588a-115b-439a-9946-a9a74266b64c",
-                            Email = "normal@user.com",
+                            ConcurrencyStamp = "88713b18-d0a5-45d9-8a99-257b78f51906",
+                            Email = "john@smith.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEJuOqoTAtGEwz9MKOwaG5gi8tNZORn52ZAugh2+9twq2kKtpBUs/XDWO4w9b0oi+cw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI5+JlooA6YBJg7cjltBYhiHKXTxxGHzRDDq4ZXXHHTZ42BKe8sjdqYns5xBWlU1hg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "38dbf764-74fa-4f25-8921-ace47d45acd1",
+                            SecurityStamp = "d6eb9c54-6e31-4eb9-9dac-bdb5bce9e602",
                             TwoFactorEnabled = false,
-                            UserName = "NormalUser"
+                            UserName = "JohnSmith"
+                        },
+                        new
+                        {
+                            Id = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "26bae9e5-4e31-4f47-a69e-2a08895d4256",
+                            Email = "Jane@Doe.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEE1hGVhmtVgNQT6O1UzyetRQybzkDIQi0womsIcFQk09jMqPDNbyXmkVfOrfZhhbSQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c7f20af0-2013-4c2f-a02d-865279a2349c",
+                            TwoFactorEnabled = false,
+                            UserName = "JaneDoe"
                         });
                 });
 
@@ -597,6 +618,11 @@ namespace BackEndCapstone.Migrations
                         new
                         {
                             UserId = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
+                            RoleId = "50a26418-8379-41c5-9cb4-937ee3be79f3"
+                        },
+                        new
+                        {
+                            UserId = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b",
                             RoleId = "50a26418-8379-41c5-9cb4-937ee3be79f3"
                         });
                 });

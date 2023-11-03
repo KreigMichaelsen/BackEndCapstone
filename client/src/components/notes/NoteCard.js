@@ -5,7 +5,9 @@ import {
   CardTitle,
   CardText,
   CardSubtitle,
-  Button
+  Button,
+  CardHeader,
+  Badge
 } from "reactstrap";
 
 import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
@@ -37,11 +39,23 @@ export default function NoteCard({  note, getAllNotes }) {
 
   return (
     <Card className="noteCard" color="dark" outline style={{ marginBottom: "4px" }}>
+       <CardHeader className="noteCardHeader" onClick={() => {
+      navigate(`/notes/${note.id}/edit`);
+    }}>
+      {note.title}
+      </CardHeader>
       <CardBody>
-        <CardTitle tag="h5">{note.title}</CardTitle>
         <CardText>{note?.project?.title}</CardText>
         <CardText>{note.body}</CardText>
-        <CardText>User: {note?.userProfile?.fullName}</CardText>
+        <CardText>
+        Created By:  
+            <Badge className="projectCategoryPillBadge"
+            color="warning"
+            pill
+            >
+          {note?.userProfile?.firstName}
+          </Badge>
+          </CardText>
         
         {/* <Button
           color="dark"

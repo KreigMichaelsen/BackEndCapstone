@@ -18,6 +18,12 @@
 
 .noteForProjectCardListContainer {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.noteCardListContainer {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .noteForProjectCard {
@@ -52,8 +58,9 @@
 }
 
 .noteCard {
-    cursor: pointer;
+    
     margin-top: 1%;
+    margin-left: 3px;
     width: 500px;
 }
 
@@ -62,3 +69,12 @@
     transform: translateY(0) scale(1.02);
     box-shadow:  0px 0px 5px rgba(0, 0, 0, 0.74); 
 }
+
+.noteCardHeader {
+    background-color: #2a2f36 ;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    
+}
+

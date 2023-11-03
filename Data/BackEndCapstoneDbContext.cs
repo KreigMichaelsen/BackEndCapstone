@@ -52,8 +52,15 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
             new IdentityUser
             {
             Id = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
-            UserName = "NormalUser",
-            Email = "normal@user.com",
+            UserName = "JohnSmith",
+            Email = "john@smith.com",
+            PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["AdminPassword"])
+            },
+            new IdentityUser
+            {
+            Id = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b",
+            UserName = "JaneDoe",
+            Email = "Jane@Doe.com",
             PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["AdminPassword"])
             }
         });
@@ -69,6 +76,11 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
             {
             RoleId = "50a26418-8379-41c5-9cb4-937ee3be79f3",
             UserId = "b756857a-13c6-434e-a3ca-dc65ad4315a0"
+            },
+            new IdentityUserRole<string>
+            {
+            RoleId = "50a26418-8379-41c5-9cb4-937ee3be79f3",
+            UserId = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b"
             }
         });
         modelBuilder.Entity<UserProfile>().HasData(new UserProfile[]
@@ -84,8 +96,15 @@ public class BackEndCapstoneDbContext : IdentityDbContext<IdentityUser>
             {
             Id = 2,
             IdentityUserId = "b756857a-13c6-434e-a3ca-dc65ad4315a0",
-            FirstName = "Normal",
-            LastName = "User",
+            FirstName = "John",
+            LastName = "Smith",
+            },
+            new UserProfile
+            {
+            Id = 3,
+            IdentityUserId = "3fd717f1-78d5-4c52-8fd4-0f55ce185a5b",
+            FirstName = "Jane",
+            LastName = "Doe",
             }
         });
 

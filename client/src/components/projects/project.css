@@ -1,13 +1,20 @@
 .projectCard {
-    cursor: pointer;
+   
     margin-top: 1%;
+    margin-left: 3px;
     width: 500px;
+}
+
+.projectCardListContainer {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .projectCardHeader {
     background-color: #2a2f36 ;
     color: white;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .projectCard:hover {
@@ -73,4 +80,18 @@
 
 .projectCategoryPillBadge {
     background-color: #2a2f36;
+}
+
+.projectCardEditButton {
+    background-color: #2a2f36;
+}
+
+.projectCardDetailsButton {
+    background-color: #2a2f36;
+}
+
+.projectEditFormContainer {
+    margin-left: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
 }
