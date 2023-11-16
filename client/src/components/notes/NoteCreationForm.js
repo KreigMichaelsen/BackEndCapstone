@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
-
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-
 import { getProjects } from "../../managers/projectManager";
 import { createProjectNote } from "../../managers/projectNoteManager";
 
 
+export const NoteCreationForm = ({ loggedInUser }) => {
 
-
-export const NoteCreationForm = ({loggedInUser}) => {
-    
     const [allProjects, setAllProjects] = useState([])
     const [projectId, setProjectId] = useState(0)
     const [title, setTitle] = useState("")
@@ -18,12 +14,9 @@ export const NoteCreationForm = ({loggedInUser}) => {
 
     const navigate = useNavigate()
 
-    
-      useEffect(() => {
+    useEffect(() => {
         getProjects().then(setAllProjects);
-       
-
-      }, []);
+    }, []);
 
 
     const handleFormSubmit = (event) => {
@@ -34,14 +27,14 @@ export const NoteCreationForm = ({loggedInUser}) => {
             projectId,
             title,
             body,
-            
+
         };
 
         createProjectNote(noteToPost)
-        .then(() => {
-            navigate("/notes"); // This ensures navigation happens after order creation
-        });
-    
+            .then(() => {
+                navigate("/notes"); // This ensures navigation happens after order creation
+            });
+
     };
 
     return <>
@@ -49,6 +42,7 @@ export const NoteCreationForm = ({loggedInUser}) => {
             <div className="noteCreationForm">
                 <h2 className="noteFormTitle">Create A New Note</h2>
                 <Form>
+                    
                     <FormGroup>
                         <Label for="titleInput">Title</Label>
                         <Input type="text"
@@ -60,6 +54,7 @@ export const NoteCreationForm = ({loggedInUser}) => {
                         >
                         </Input>
                     </FormGroup>
+
                     <FormGroup>
                         <Label for="bodyInput">Note Body</Label>
                         <Input type="textarea"
@@ -71,6 +66,7 @@ export const NoteCreationForm = ({loggedInUser}) => {
                         >
                         </Input>
                     </FormGroup>
+
                     <FormGroup>
                         <Label for="projectSelect">Project</Label>
                         <Input type="select"
@@ -86,17 +82,19 @@ export const NoteCreationForm = ({loggedInUser}) => {
                             ))}
                         </Input>
                     </FormGroup>
+
                     <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                         Create Note
                     </Button>
                     <Button
-                color="danger"
-                onClick={() => {
-                    navigate(`/notes`)
-                }}
-                >
-                Cancel
-                </Button>
+                        color="danger"
+                        onClick={() => {
+                            navigate(`/notes`)
+                        }}
+                    >
+                        Cancel
+                    </Button>
+
                 </Form>
             </div>
         </div>

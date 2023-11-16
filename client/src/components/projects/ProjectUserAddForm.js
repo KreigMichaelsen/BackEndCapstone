@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
-
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-
-
 import { createUserProject, getUserProjectsNotAssociatedByProjectWithId } from "../../managers/userProjectManager";
 import { getProjectById } from "../../managers/projectManager";
 import { getUsersNotAssociatedWithProject } from "../../managers/userProfileManager";
@@ -18,10 +15,7 @@ export const ProjectUserAddForm = ({toggleModal, getAllUsersForProject}) => {
    
     const { id } = useParams();
     
-
     const navigate = useNavigate()
-
-  
 
     const getProjectDetails = (id) => {
         getProjectById(id).then(setProject);
@@ -31,19 +25,13 @@ export const ProjectUserAddForm = ({toggleModal, getAllUsersForProject}) => {
         getUsersNotAssociatedWithProject(id).then(setUnassignedUserProfiles);
       };
 
-
-
       useEffect(() => {
         getProjectDetails(id);
         getUnassignedUsers(id);
     }, [id]);
-  
-
-
 
     const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
-        
+        event.preventDefault(); 
         
         const userProjectToPost = {
             userProfileId,
@@ -54,11 +42,9 @@ export const ProjectUserAddForm = ({toggleModal, getAllUsersForProject}) => {
         createUserProject(userProjectToPost)
         .then(() => {
             getAllUsersForProject(project.id);
-            // This ensures navigation happens after order creation
         })
         .then(() => {
-            
-            toggleModal(); // This ensures navigation happens after order creation
+            toggleModal(); 
         });
     
     };

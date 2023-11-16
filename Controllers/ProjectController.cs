@@ -35,14 +35,14 @@ public class ProjectController : ControllerBase
         .Where(up => up.UserProfileId == userid)
         .Select(up => up.ProjectId);
 
-    var projectsForUser = _dbContext.Projects
-        .Include(p => p.Category)
-        .Include(p => p.UserProjects)
-        .ThenInclude(up => up.UserProfile)
-        .Where(p => userProjects.Contains(p.Id))
-        .ToList();
+        var projectsForUser = _dbContext.Projects
+            .Include(p => p.Category)
+            .Include(p => p.UserProjects)
+            .ThenInclude(up => up.UserProfile)
+            .Where(p => userProjects.Contains(p.Id))
+            .ToList();
 
-    return Ok(projectsForUser);
+        return Ok(projectsForUser);
     }
 
     [HttpGet("{id}")]
@@ -64,7 +64,7 @@ public class ProjectController : ControllerBase
             return NotFound();
         }
 
-            return Ok(project);
+        return Ok(project);
     }
 
     [HttpPost]
@@ -74,26 +74,26 @@ public class ProjectController : ControllerBase
         Project newProject = new Project
         {
 
-        Id = _dbContext.Projects.Count() > 0 ? _dbContext.Projects.Max(p => p.Id) + 1 : 1,
-        Title = project.Title,
-        CategoryId = project.CategoryId
+            Id = _dbContext.Projects.Count() > 0 ? _dbContext.Projects.Max(p => p.Id) + 1 : 1,
+            Title = project.Title,
+            CategoryId = project.CategoryId
 
         };
-        
+
         _dbContext.Projects.Add(newProject);
 
         foreach (UserProfile userProfile in project.UserProfiles)
         {
-             _dbContext.UserProjects.Add (new UserProject
+            _dbContext.UserProjects.Add(new UserProject
             {
                 Id = _dbContext.UserProjects.Count() > 0 ? _dbContext.UserProjects.Max(p => p.Id) + 1 : 1,
                 ProjectId = newProject.Id,
                 UserProfileId = userProfile.Id
 
             }
-             );
+            );
         }
-        
+
 
         _dbContext.SaveChanges();
         return Created($"/api/project/{project.Id}", project);
@@ -106,7 +106,7 @@ public class ProjectController : ControllerBase
         Project projectToUpdate = _dbContext.Projects
 
         .SingleOrDefault(p => p.Id == id);
-        if (projectToUpdate  == null)
+        if (projectToUpdate == null)
         {
             return NotFound();
         }
@@ -135,8 +135,8 @@ public class ProjectController : ControllerBase
         }
 
         //These are the only properties that we want to make editable
-       projectToComplete.IsCompleted = true;
-       
+        projectToComplete.IsCompleted = true;
+
         _dbContext.SaveChanges();
 
         return NoContent();
@@ -144,7 +144,7 @@ public class ProjectController : ControllerBase
 
     [HttpPut("{id}/updateCompletion")]
     // [Authorize]
-    public IActionResult UpdateProjectCompletion (int id, decimal progressNumber)
+    public IActionResult UpdateProjectCompletion(int id, decimal progressNumber)
     {
         Project projectToUpdate = _dbContext.Projects.SingleOrDefault(wo => wo.Id == id);
         if (projectToUpdate == null)
@@ -153,7 +153,7 @@ public class ProjectController : ControllerBase
         }
 
         //These are the only properties that we want to make editable
-       projectToUpdate.Completion = progressNumber;
+        projectToUpdate.Completion = progressNumber;
 
         _dbContext.SaveChanges();
 
@@ -171,31 +171,13 @@ public class ProjectController : ControllerBase
         }
 
         //These are the only properties that we want to make editable
-       projectToNotComplete.IsCompleted = false;
-        
+        projectToNotComplete.IsCompleted = false;
+
 
         _dbContext.SaveChanges();
 
         return NoContent();
     }
-    // [HttpPut("{id}/complete")]
-    // [Authorize]
-    // public IActionResult CompleteWorkOrder(int id)
-    // {
-    //     WorkOrder workOrderToComplete = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToComplete == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     //These are the only properties that we want to make editable
-    //     workOrderToComplete.DateCompleted = DateTime.Now;
-        
-
-    //     _dbContext.SaveChanges();
-
-    //     return NoContent();
-    // }
 
     [HttpDelete("{id}")]
     // [Authorize]
@@ -211,25 +193,25 @@ public class ProjectController : ControllerBase
         }
 
         if (projectToDelete.UserProjects != null)
-{
-    _dbContext.UserProjects.RemoveRange(projectToDelete.UserProjects);
-}
+        {
+            _dbContext.UserProjects.RemoveRange(projectToDelete.UserProjects);
+        }
 
-if (projectToDelete.ProjectTasks != null)
-{
-    _dbContext.ProjectTasks.RemoveRange(projectToDelete.ProjectTasks);
-}
+        if (projectToDelete.ProjectTasks != null)
+        {
+            _dbContext.ProjectTasks.RemoveRange(projectToDelete.ProjectTasks);
+        }
 
-if (projectToDelete.ProjectNotes != null)
-{
-    _dbContext.ProjectNotes.RemoveRange(projectToDelete.ProjectNotes);
-}
+        if (projectToDelete.ProjectNotes != null)
+        {
+            _dbContext.ProjectNotes.RemoveRange(projectToDelete.ProjectNotes);
+        }
 
-if (projectToDelete != null)
-{
-    _dbContext.Projects.Remove(projectToDelete);
-    _dbContext.SaveChanges();
-}
+        if (projectToDelete != null)
+        {
+            _dbContext.Projects.Remove(projectToDelete);
+            _dbContext.SaveChanges();
+        }
 
         return NoContent();
     }

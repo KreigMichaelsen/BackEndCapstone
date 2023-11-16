@@ -24,7 +24,6 @@ export default function ProjectDetails({loggedInUser}) {
   });
   const [tasksForProject, setTasksForProject] = useState([]);
   const [filteredTasksForProject, setFilteredTasksForProject] = useState([]);
-  // const [completed, setCompleted] = useState();
   const [showCompleted, setShowCompleted] = useState(false);
   const [projectNotesForProject, setProjectNotesForProject] = useState([]);
   const [userProjectsForProject, setUserProjectsForProject] = useState([]);
@@ -66,7 +65,7 @@ export default function ProjectDetails({loggedInUser}) {
   };
 
   const getAllTasksForProject = (id) => {
-    getProjectTaskByProjectId(id).then(setAllTasksForProject); // Replace getOrders with your actual method to fetch orders
+    getProjectTaskByProjectId(id).then(setAllTasksForProject); 
   };
 
   const getTasksForProject = (id) => {
@@ -78,12 +77,10 @@ export default function ProjectDetails({loggedInUser}) {
         const incompleteTasks = tasks?.filter(task => !task.isCompleted);
         setTasksForProject(incompleteTasks);
       } else {
-        setTasksForProject(tasks); // Show all tasks
+        setTasksForProject(tasks); 
       }
     });
   };
-
- 
 
 
   useEffect(() => {
@@ -106,7 +103,6 @@ useEffect(() => {
 
   useEffect(() => {
 
-   // Calculate progress percentage
    const completedTasksCount = allTasksForProject?.filter(task => task.isCompleted).length;
    const totalTasksCount = allTasksForProject.length;
    if (totalTasksCount > 0) {
@@ -145,20 +141,11 @@ useEffect(() => {
     
   }, [projectCompleted]);
 
-
-// useEffect(() => {
-//   // Update project.completion whenever progress changes
-//   console.log(progress)
-//   setProject(prevProject => ({ ...prevProject, completion: progress }));
-// }, [progress]);
-
-
   return (
     <div className="projectDetailsContainer">
       <h1>{project?.title}</h1>
       <Card  className="projectDetailsCard" inverse>
         <CardBody>
-          {/* <CardTitle tag="h4">Details</CardTitle> */}
           <Progress className="projectProgressBar" color="warning" value={progress} />
           <CardText>Completion: {progress}%</CardText>
           <CardText>
@@ -170,7 +157,6 @@ useEffect(() => {
             {project?.category?.title}
           </Badge>
           </CardText>
-          {/* <CardText>DueDate: {project?.dueDate}</CardText> */}
           <CardTitle tag="h4">Users</CardTitle>
           
     <div>
@@ -310,11 +296,6 @@ useEffect(() => {
 
             ))}
             </div>
-            {/* <div>
-              <ProjectCalender>
-
-              </ProjectCalender>
-            </div> */}
           
 
     </div>

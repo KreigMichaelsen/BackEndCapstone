@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
-
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-
 import { createProjectNote } from "../../managers/projectNoteManager";
 import { getProjectById } from "../../managers/projectManager";
-
 
 
 
@@ -23,11 +20,8 @@ export const ProjectNoteAddForm = ({loggedInUser, toggleNoteModal, getAllNotesFo
       getProjectById(id).then(setProject);
     };
   
-
-
     useEffect(() => {
         getProjectDetails(id);
-      
     }, [id]);
 
 

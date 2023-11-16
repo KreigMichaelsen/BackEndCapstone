@@ -15,8 +15,7 @@ import { deleteUserProject, getUserProjectsByProjectId } from "../../managers/us
 export default function UserProjectForProjectCard({ userProject, getAllUserProjects, getProjectDetails, project, getAllUsersForProject }) {
 
   const deleteProjectFunction = (userProjectId) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteUserProject(userProjectId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteUserProject(userProjectId) 
       .then(() => {
         getAllUsersForProject(project.id);
       })
@@ -31,14 +30,11 @@ export default function UserProjectForProjectCard({ userProject, getAllUserProje
       {userProject?.userProfile?.fullName}
       </CardHeader>
       <CardBody>
-        {/* <CardSubtitle className="mb-2 text-muted" tag="h6">
-         Id: {userProject?.id}
-        </CardSubtitle> */}
 
         <Button
           onClick={() => deleteProjectFunction(userProject.id)}
           color="danger"
-          style={{ marginLeft: "8px" }} // Add left margin for spacing
+          style={{ marginLeft: "8px" }} 
         >
           Remove
         </Button>

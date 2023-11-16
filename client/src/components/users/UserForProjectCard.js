@@ -14,14 +14,14 @@ import { deleteUserProject, getUserProjectsByProjectId } from "../../managers/us
 export default function UserProjectForProjectCard({ userProject, getAllUserProjects, getProjectDetails, project, getAllUsersForProject }) {
 
   const deleteProjectFunction = (userProjectId) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteUserProject(userProjectId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteUserProject(userProjectId) 
       .then(() => {
         getAllUsersForProject(project.id);
       })
   };
 
   const navigate = useNavigate();
+  
   return (
     <Card color="dark" outline style={{ marginBottom: "4px" }}>
       <CardBody>

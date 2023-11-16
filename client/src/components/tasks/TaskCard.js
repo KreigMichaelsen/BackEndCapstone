@@ -19,19 +19,16 @@ import { completeTask, deleteTask } from "../../managers/projectTaskManager";
 export default function TaskCard({ task, getAllTasks, project, getProjectDetails, getAllTasksForProject }) {
   const navigate = useNavigate();
 
-  //^ Function to delete an order
   const deleteTaskFunction = (taskId) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteTask(taskId) 
       .then(() => {
         getAllTasks();
       })
   };
 
-    //^ Function to delete an order
+    
     const completeTaskFunction = (taskId) => {
-      // Send an HTTP DELETE request to delete the work order
-      completeTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+      completeTask(taskId)  
         .then(() => {
           getAllTasks();
         })
@@ -61,13 +58,13 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
              <Button
              onClick={() => completeTaskFunction(task.id)}
              color="warning"
-             style={{ marginLeft: "8px" }} // Add left margin for spacing
+             style={{ marginLeft: "8px" }} 
            >
              <BsFillCheckSquareFill />
            </Button>
         }
         <Button className="taskCardDetailsButton"
-          // color="secondary"
+          
           onClick={() => {
             navigate(`/tasks/${task.id}`);
           }}
@@ -75,7 +72,7 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
           <BsFillGearFill />
         </Button>
         <Button className="taskCardEditButton"
-          // color="secondary"
+          
           onClick={() => {
             navigate(`/tasks/${task.id}/edit`);
           }}
@@ -85,7 +82,7 @@ export default function TaskCard({ task, getAllTasks, project, getProjectDetails
         <Button
           onClick={() => deleteTaskFunction(task.id)}
           color="danger"
-          style={{ marginLeft: "8px" }} // Add left margin for spacing
+          style={{ marginLeft: "8px" }} 
         >
           <BsTrash3Fill />
         </Button>

@@ -24,38 +24,23 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
   const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  // const [completionTooltipOpen, setCompletionTooltipOpen] = useState(false);
-  // const [detailsTooltipOpen, setDetailsTooltipOpen] = useState(false);
-  // const [editTooltipOpen, setEditTooltipOpen] = useState(false);
-  // const [deleteTooltipOpen, setDeleteTooltipOpen] = useState(false);
   
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  // const toggleCompletionToolTip = () => setCompletionTooltipOpen(!completionTooltipOpen);
-  // const toggleDetailsToolTip = () => setDetailsTooltipOpen(!detailsTooltipOpen);
-  // const toggleEditToolTip = () => setEditTooltipOpen(!editTooltipOpen);
-  // const toggleDeleteToolTip = () => setDeleteTooltipOpen(!deleteTooltipOpen);
-
-
-  //^ Function to delete an order
+ 
   const deleteTaskFunction = (taskId) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteTask(taskId)  
       .then(() => {
         getTasksForProject(project.id);
         getAllTasksForProject(project.id);
-        // getProjectDetails(project.id);
       })
   };
 
-    //^ Function to delete an order
     const completeTaskFunction = (taskId) => {
-      // Send an HTTP DELETE request to delete the work order
-      completeTask(taskId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+      completeTask(taskId)  
         .then(() => {
           getTasksForProject(project.id);
           getAllTasksForProject(project.id);
-          // getProjectDetails(project.id);
         })
     };
 
@@ -85,13 +70,6 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
            >
             <BsFillCheckSquareFill />
            </Button>
-           {/* <Tooltip
-           isOpen={completionTooltipOpen}
-           target="completeTaskCardForProjectButton"
-           toggle={toggleCompletionToolTip}
-         >
-           Complete Task
-         </Tooltip> */}
          </div>
         }
        <Button className="taskCardDetailsButton"
@@ -121,13 +99,7 @@ export default function TaskForProjectCard({ task, getAllTasks, project, getProj
         >
           <BsTrash3Fill />
         </Button>
-        {/* <Tooltip
-           isOpen={deleteTooltipOpen}
-           target="deleteTaskCardForProjectButton"
-           toggle={toggleDeleteToolTip}
-         >
-           Delete Task
-         </Tooltip> */}
+
       </CardBody>
     </Card>
   );

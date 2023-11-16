@@ -16,7 +16,6 @@ export const TaskEditForm = () => {
     const [allUserProfiles, setAllUserProfiles] = useState([])
     const [allCategories, setAllCategories] = useState([])
     const [allProjects, setAllProjects] = useState([])
-    
     const [userProfileId, setUserProfileId] = useState(0)
     const [categoryId, setCategoryId] = useState(0)
     const [projectId, setProjectId] = useState(0)
@@ -47,15 +46,8 @@ export const TaskEditForm = () => {
 
     }, [id]);
 
-    // useEffect(() => {
-    //     getTaskDetails(id);
-      
-    // }, [id]);
-
-
     const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
-
+        event.preventDefault(); 
         const taskToEdit = {
             id: task.id,
             userProfileId,
@@ -68,7 +60,7 @@ export const TaskEditForm = () => {
 
         editTask(taskToEdit)
         .then(() => {
-            navigate("/tasks"); // This ensures navigation happens after order creation
+            navigate("/tasks"); 
         });
     
     };

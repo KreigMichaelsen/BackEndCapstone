@@ -88,24 +88,6 @@ public class ProjectNoteController : ControllerBase
 
         return NoContent();
     }
-    // [HttpPut("{id}/complete")]
-    // // [Authorize]
-    // public IActionResult CompleteTask(int id)
-    // {
-    //     ProjectTask projectTaskToComplete = _dbContext.ProjectTasks.SingleOrDefault(wo => wo.Id == id);
-    //     if (projectTaskToComplete == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     //These are the only properties that we want to make editable
-    //    projectTaskToComplete.IsCompleted = true;
-        
-
-    //     _dbContext.SaveChanges();
-
-    //     return NoContent();
-    // }
 
     [HttpDelete("{id}")]
     // [Authorize]
