@@ -14,8 +14,7 @@ import { deleteUserProject } from "../../managers/userProjectManager";
 export default function UserProjectCard({ userProject, getAllUserProjects, getProjectDetails, project }) {
 
   const deleteProjectFunction = (userProjectId) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteUserProject(userProjectId) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteUserProject(userProjectId) 
       .then(() => {
         getAllUserProjects();
       })

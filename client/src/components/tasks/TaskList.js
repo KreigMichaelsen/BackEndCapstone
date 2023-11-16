@@ -28,9 +28,9 @@ export default function TaskList({loggedInUser}) {
         const incompleteTasks = t.filter(t => !t.isCompleted);
         setTasks(incompleteTasks);
       } else {
-        setTasks(t); // Show all tasks
+        setTasks(t); 
       }
-    }); // Replace getOrders with your actual method to fetch orders
+    }); 
   };
 
   useEffect(() => {
@@ -45,29 +45,10 @@ export default function TaskList({loggedInUser}) {
 
   }, [tasks]);
 
-//   useEffect(
-//     () => {
-//         if (completed) {
-//             const finishedTasks = tasks.filter(task => task.isCompleted === true)
-//             setFilteredTasks(finishedTasks)
-//         }
-//         else {
-//             const unfinishedTasks = tasks.filter(task => task.isCompleted === false)
-//             setFilteredTasks(unfinishedTasks)
-//             // getAllFilteredUserCoffeeShops()
-//         }
-//     },
-//     [completed]
-// )
-
-
 
   return (
     <>  
     
-      {/* <Button onClick={() => setShowCompleted(false)}>Show Incomplete</Button>
-      <Button onClick={() => setShowCompleted(true)}>Show Completed</Button>
-      <Button onClick={() => setShowCompleted(null)}>Show All Tasks</Button> */}
       <Button
           className="createTaskButton"
           color="warning"

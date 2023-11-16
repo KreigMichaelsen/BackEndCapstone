@@ -5,7 +5,6 @@ import ProjectCard from "./ProjectCard";
 export default function AllProjectList() {
   const [projects, setProjects] = useState([]);
 
-
   const getAllProjects = () => {
     getProjects().then(setProjects);
   };

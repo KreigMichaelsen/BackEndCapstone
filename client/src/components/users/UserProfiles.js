@@ -11,14 +11,6 @@ export default function UserProfiles() {
   return (
     <div className="userProfilesContainer">
       <h2>Users</h2>
-       {/* <Button
-          color="dark"
-          onClick={() => {
-            navigate(`/tasks/create`)
-          }}
-        >
-          Create Task
-        </Button> */}
       <div className="row">
         <div className="col-sm-8">
           <UserProfileList />

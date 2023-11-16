@@ -182,14 +182,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-        {/* <Route
-            path="create"
-            element={
-              <AuthorizedRoute loggedInUser={loggedInUser}>
-                <TaskCreationForm/>
-              </AuthorizedRoute>
-            }
-            /> */}
         </Route>
         
         <Route path="userProjects">
@@ -201,14 +193,6 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-        {/* <Route
-          path=":id"
-          element={
-            <AuthorizedRoute loggedInUser={loggedInUser}>
-              <UserProfileDetails />
-            </AuthorizedRoute>
-          }
-        /> */}
         <Route
             path="create"
             element={

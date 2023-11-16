@@ -13,14 +13,6 @@ export default function UserProjects() {
       <div className="row">
       <h2>User Projects</h2>
       <div className="col-sm-8">
-      {/* <Button
-          color="dark"
-          onClick={() => {
-            navigate(`/projects/create`)
-          }}
-        >
-          Create Project
-        </Button> */}
         </div>
         <div className="col-sm-8">
           <UserProjectList />

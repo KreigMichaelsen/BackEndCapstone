@@ -14,7 +14,6 @@ export const TaskCreationForm = () => {
     const [allUserProfiles, setAllUserProfiles] = useState([])
     const [allCategories, setAllCategories] = useState([])
     const [allProjects, setAllProjects] = useState([])
-    
     const [userProfileId, setUserProfileId] = useState(0)
     const [categoryId, setCategoryId] = useState(0)
     const [projectId, setProjectId] = useState(0)
@@ -34,7 +33,7 @@ export const TaskCreationForm = () => {
 
 
     const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
+        event.preventDefault(); 
 
         const taskToPost = {
             userProfileId,
@@ -47,7 +46,7 @@ export const TaskCreationForm = () => {
 
         createProjectTask(taskToPost)
         .then(() => {
-            navigate("/tasks"); // This ensures navigation happens after order creation
+            navigate("/tasks"); 
         });
     
     };
@@ -57,7 +56,7 @@ export const TaskCreationForm = () => {
         <div className="taskCreationForm">
             <h2 className="taskCreationFormTitle">Create A New Task</h2>
             <Form>
-            <FormGroup>
+                <FormGroup>
                     <Label for="titleInput">Title</Label>
                     <Input type="text" 
                     name="title" 
@@ -120,11 +119,8 @@ export const TaskCreationForm = () => {
                         onChange={(e) => {
                         setDueDate(e.target.value)}}
                         />
-                        
-
                 </FormGroup>
                 
-
                 <Button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>
                     Create Task
                 </Button>

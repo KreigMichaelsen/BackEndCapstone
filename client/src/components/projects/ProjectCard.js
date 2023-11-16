@@ -1,15 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardSubtitle,
-  Button,
-  Progress,
-  CardHeader,
-  Badge,
-} from "reactstrap";
+import {Card,CardBody,CardText,Button,CardHeader,Badge} from "reactstrap";
 import "./project.css"
 import { BsTrash3Fill, BsFillCheckSquareFill, BsFillGearFill, BsPencilSquare} from "react-icons/bs";
 import { deleteProject } from "../../managers/projectManager";
@@ -17,8 +7,7 @@ import { deleteProject } from "../../managers/projectManager";
 export default function ProjectCard({ project, getAllProjects }) {
 
   const deleteProjectFunction = (id) => {
-    // Send an HTTP DELETE request to delete the work order
-    deleteProject(id) // this says, run the deleteThisWorkOrder function on the selected OrderId, which will run the DELETE method on that object in the database
+    deleteProject(id)
       .then(() => {
         getAllProjects();
       })
@@ -32,9 +21,7 @@ export default function ProjectCard({ project, getAllProjects }) {
     }}>
       {project.title}
       </CardHeader>
-      <CardBody  
-      // onClick={() => {navigate(`/projects/${project.id}`)}}
-          >
+      <CardBody>
         <CardText>
             Category:  
             <Badge className="projectCategoryPillBadge"
@@ -44,9 +31,6 @@ export default function ProjectCard({ project, getAllProjects }) {
             {project?.category?.title}
           </Badge>
           </CardText>
-        {/* <Progress
-        value={36}
-        /> */}
         <Button
           className="projectCardDetailsButton"
           // color="dark"
@@ -69,7 +53,7 @@ export default function ProjectCard({ project, getAllProjects }) {
           className="projectCardDeleteButton"
           onClick={() => deleteProjectFunction(project.id)}
           color="danger"
-          style={{ marginLeft: "8px" }} // Add left margin for spacing
+          style={{ marginLeft: "8px" }} 
         >
           <BsTrash3Fill />
         </Button>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
-
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { createProject, editProject, getProjectById } from "../../managers/projectManager";
 import { getCategories } from "../../managers/categoryManager";
@@ -11,24 +10,19 @@ export const ProjectEditForm = () => {
 
     const [project, setProject] = useState(null);
     const [allCategories, setAllCategories] = useState([])
-    
-
     const [categoryId, setCategoryId] = useState(0)
     const [title, setTitle] = useState("")
  
-    
     const { id } = useParams();
 
     const navigate = useNavigate()
 
-
     const getAllCategories = () => {
-        getCategories().then(setAllCategories); // Replace getOrders with your actual method to fetch orders
+        getCategories().then(setAllCategories); 
     };
     
       useEffect(() => {
         getAllCategories();
-
         getProjectById(id).then((project) => {
             setProject(project);
             setCategoryId(project.categoryId);
@@ -37,11 +31,8 @@ export const ProjectEditForm = () => {
       
     }, [id]);
 
-
-
-
     const handleFormSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
+        event.preventDefault(); 
         
         const projectToEdit = {
             id: project.id,
@@ -52,7 +43,7 @@ export const ProjectEditForm = () => {
 
         editProject(projectToEdit)
         .then(() => {
-            navigate("/projects"); // This ensures navigation happens after order creation
+            navigate("/projects"); 
         });
     
     };

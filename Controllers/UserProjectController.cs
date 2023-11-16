@@ -63,89 +63,15 @@ public class UserProjectController : ControllerBase
     return Ok(userProjectsNotForProject);
     }
 
-    //     [HttpGet("{projectId}/notForProject")]
-    // // [Authorize]
-    // public IActionResult GetUserProjectsNotForProject(int projectId)
-    // {
-    //     return Ok(_dbContext.UserProjects
-    //     .Include(up => up.UserProfile)
-    //     .Where(up => up.ProjectId != projectId)
-    //     .ToList());
-    // }
-
-    // [HttpGet("{id}")]
-    // // [Authorize]
-    // public IActionResult GetById(int id)
-    // {
-    //     Project project = _dbContext
-    //         .Projects
-    //         .Include(p => p.Category)
-    //         .Include(p => p.ProjectNotes)
-    //         .Include(p => p.ProjectTasks)
-    //         .Include(p => p.UserProjects)
-    //         .ThenInclude(up => up.UserProfile)
-    //         .SingleOrDefault(p => p.Id == id);
-
-    //     if (project == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //         return Ok(project);
-    // }
 
     [HttpPost]
     // [Authorize]
     public IActionResult CreateUserProject(UserProject userProject)
     {
-        // int newId = _dbContext.UserProjects.Count() > 0 ? _dbContext.UserProjects.Max(p => p.Id) + 1 : 1;
-        // userProject.Id = newId;
         _dbContext.UserProjects.Add(userProject);
         _dbContext.SaveChanges();
         return Created($"/api/userproject/{userProject.Id}", userProject);
     }
-
-    // [HttpPut("{id}")]
-    // [Authorize]
-    // public IActionResult UpdateWorkOrder(WorkOrder workOrder, int id)
-    // {
-    //     WorkOrder workOrderToUpdate = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToUpdate == null)
-    //     {
-    //         return NotFound();
-    //     }
-    //     else if (id != workOrder.Id)
-    //     {
-    //         return BadRequest();
-    //     }
-
-    //     //These are the only properties that we want to make editable
-    //     workOrderToUpdate.Description = workOrder.Description;
-    //     workOrderToUpdate.UserProfileId = workOrder.UserProfileId;
-    //     workOrderToUpdate.BikeId = workOrder.BikeId;
-
-    //     _dbContext.SaveChanges();
-
-    //     return NoContent();
-    // }
-    // [HttpPut("{id}/complete")]
-    // [Authorize]
-    // public IActionResult CompleteWorkOrder(int id)
-    // {
-    //     WorkOrder workOrderToComplete = _dbContext.WorkOrders.SingleOrDefault(wo => wo.Id == id);
-    //     if (workOrderToComplete == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     //These are the only properties that we want to make editable
-    //     workOrderToComplete.DateCompleted = DateTime.Now;
-        
-
-    //     _dbContext.SaveChanges();
-
-    //     return NoContent();
-    // }
 
     [HttpDelete("{id}")]
     // [Authorize]
